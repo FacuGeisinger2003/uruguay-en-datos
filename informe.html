@@ -114,6 +114,7 @@
   ul.lim li { margin-bottom: 1.6mm; }
   .contact { display: grid; grid-template-columns: auto 1fr; gap: 1.5mm 5mm; font-size: 9pt; margin-top: 4mm; }
   .contact span { color: var(--muted); }
+  .stats.stats3 { grid-template-columns: repeat(3, 1fr); }
 </style>
 </head>
 <body>
@@ -135,11 +136,11 @@
 <section>
   <div class="label">Contenido</div>
   <ol class="toc">
-    <li><span>01</span><span>Pobreza infantil <em>Concentración de la pobreza en la primera infancia</em></span></li>
-    <li><span>02</span><span>Educación <em>Egreso de media superior, inserción laboral y natalidad</em></span></li>
+    <li><span>01</span><span>Pobreza infantil y natalidad <em>Concentración de la pobreza en la primera infancia</em></span></li>
+    <li><span>02</span><span>Educación y jóvenes <em>Egreso de la educación media y desempleo juvenil</em></span></li>
     <li><span>03</span><span>Seguridad <em>Homicidios y sistema penitenciario</em></span></li>
     <li><span>04</span><span>Comparación regional <em>Uruguay frente a 11 países de América Latina</em></span></li>
-    <li><span>05</span><span>Fortalezas <em>Instituciones, matriz eléctrica y banda ancha fija</em></span></li>
+    <li><span>05</span><span>Lo que sí funciona <em>Instituciones y el acuerdo energético</em></span></li>
     <li><span>06</span><span>Conclusión <em>Instituciones que funcionan, resultados que no</em></span></li>
     <li><span>A</span><span>Metodología y fuentes</span></li>
     <li><span>B</span><span>Siglas y glosario</span></li>
@@ -149,14 +150,13 @@
   <h2 class="h-sec">Principales hallazgos</h2>
   <p>Este informe reúne indicadores oficiales sobre pobreza infantil, educación, seguridad y desempeño regional de Uruguay. Busca mostrar en qué dimensiones el país se ubica bien frente a la región y en cuáles persisten brechas relevantes.</p>
   <ol class="findings">
-    <li><p><b>32,2%</b> de los niños de 0 a 5 años vive en hogares pobres, unas cinco veces más que las personas de 65 años o más (6,3%).</p></li>
-    <li><p>Solo el <b>53,2%</b> de los jóvenes de 21 a 23 años terminó la educación media superior. Las mujeres terminan más que los hombres en todas las generaciones.</p></li>
-    <li><p>Entre los jóvenes de 18 a 29 años que buscan trabajo, el desempleo es de <b>22,8%</b> sin la educación media completa y de <b>17,6%</b> con la educación media completo.</p></li>
+    <li><p><b>29,1%</b> de los niños de 0 a 5 años vive en hogares pobres, unas cinco veces más que las personas de 65 años o más (6,0%). Dato de 2025.</p></li>
     <li><p>Los nacimientos cayeron <b>39%</b> entre 2015 y 2024: de 48.926 a 29.899 por año.</p></li>
+    <li><p>Solo el <b>53,2%</b> de los jóvenes de 21 a 23 años terminó la educación media superior, y el desempleo juvenil (<b>25,2%</b>) es el más alto de 12 países de la región.</p></li>
     <li><p>Los homicidios por conflictos entre criminales pasaron de <b>77</b> en 2013 a <b>215</b> en 2025, y ya son más de la mitad del total (375). El resto de los homicidios bajó: todo el aumento viene de ese motivo.</p></li>
     <li><p>La población presa pasó de <b>6.757</b> personas en 2003 a <b>16.107</b> en 2024. En 2024, el programa de cárceles gastó unos <b>$ 31.000 por persona presa por mes</b>, 1,4 salarios mínimos.</p></li>
-    <li><p>Entre 12 países de América Latina (10 de Sudamérica, Costa Rica y México), Uruguay tiene el mayor ingreso por persona y la menor desigualdad, pero el <b>mayor desempleo juvenil</b> y la <b>menor proporción de adultos con secundaria completa</b>.</p></li>
-    <li><p>En el mismo grupo, Uruguay ocupa el <b>primer puesto</b> en control de la corrupción, estado de derecho, libertades y estabilidad política, y genera el <b>51%</b> de su electricidad con viento, sol y biomasa (promedio OCDE: 17%).</p></li>
+    <li><p>Entre 12 países de América Latina, Uruguay tiene el mayor ingreso por persona y la menor desigualdad, pero el <b>mayor desempleo juvenil</b> y la <b>menor proporción de adultos con secundaria completa</b>.</p></li>
+    <li><p>En el mismo grupo, Uruguay ocupa el <b>primer puesto</b> en control de la corrupción, estado de derecho, libertades y estabilidad política.</p></li>
   </ol>
   <div class="note-box">
     <p><b>Sobre este informe.</b> Todas las cifras salen de fuentes oficiales, que se citan debajo de cada gráfico. Las siglas se explican en el anexo B. Los porcentajes que salen de la Encuesta Continua de Hogares están ponderados para representar a toda la población.</p>
@@ -166,90 +166,36 @@
 
 <!-- ============ 01 ============ -->
 <header class="ch-head">
-  <div class="ch-num"><b>01</b><span>Pobreza infantil</span></div>
-  <h2>La pobreza se concentra en la primera infancia</h2>
-  <p class="lede">En 2024, el 32,2% de los niños de 0 a 5 años vivía en hogares bajo la línea de pobreza. La incidencia de la pobreza disminuye de forma sostenida con la edad.</p>
+  <div class="ch-num"><b>01</b><span>Pobreza infantil y natalidad</span></div>
+  <h2>De cada 100 niños de 0 a 5 años, 29 viven en hogares pobres</h2>
+  <p class="lede">La pobreza en Uruguay está muy concentrada en los más chicos: un niño de 0 a 5 años tiene unas cinco veces más probabilidad de ser pobre que una persona de 65 años o más.</p>
 </header>
-
-<h3>Pobreza por tramo de edad</h3>
-<p>La incidencia entre los niños de 0 a 5 años es unas cinco veces la de las personas de 65 años o más (32,2% frente a 6,3%). Una explicación habitual es que la mayoría de los mayores recibe ingresos fijos por jubilaciones y pensiones, mientras que los ingresos de los hogares con niños dependen más del mercado de trabajo.</p>
+<p>Una explicación habitual es que la mayoría de los mayores recibe ingresos fijos por jubilaciones y pensiones, mientras que los ingresos de los hogares con niños dependen más del mercado de trabajo.</p>
 <figure>
-  <figcaption class="top"><b>Gráfico 1.</b>Personas en hogares pobres, por tramo de edad (%)</figcaption>
-  <ul class="legend" id="lg-tramo"></ul>
+  <figcaption class="top"><b>Gráfico 1.</b>Personas en hogares pobres, por tramo de edad, 2025 (%)</figcaption>
   <div class="chart" id="g-tramo"></div>
-  <div class="src" data-fuente="ech2024,ech2025" data-det="variable pobre17 (método INE 2017), ponderada con W_ANO. La ECH 2025 es de implantación: la comparación con 2024 es indicativa."></div>
+  <div class="src" data-fuente="ech2025" data-det="variable pobre17 (método INE 2017), ponderada con W_ANO. La ECH 2025 es el primer año con el nuevo diseño de la encuesta."></div>
 </figure>
-
-<h3>Pobreza por edad simple</h3>
-<p>Edad por edad, la incidencia desciende casi sin interrupciones: es cercana al 40% en el primer año de vida y menor al 5% a los 80 años. Los puntos muestran el dato de cada edad; la línea, el promedio de tres edades consecutivas.</p>
-<p>El gráfico es una foto de un año: no sigue a las mismas personas a lo largo de su vida. No indica que los niños salgan de la pobreza al crecer, sino que hoy la pobreza se concentra en los hogares con niños, mientras que los mayores están más protegidos.</p>
+<h3>Cada vez nacen menos niños</h3>
+<p>Cada generación de niños y jóvenes es más chica que la anterior. Con menos niños, que cada uno crezca fuera de la pobreza pesa todavía más para el futuro del país.</p>
 <figure>
-  <figcaption class="top"><b>Gráfico 2.</b>Personas en hogares pobres, por edad simple (%)<em>Puntos: dato de cada edad. Línea: promedio móvil de 3 edades, para suavizar la variación de muestra.</em></figcaption>
-  <ul class="legend" id="lg-edad"></ul>
-  <div class="chart" id="g-edad"></div>
-  <div class="src" data-fuente="ech2024,ech2025" data-det="variable pobre17, ponderada con W_ANO."></div>
+  <figcaption class="top"><b>Gráfico 2.</b>Nacimientos por año, 2015–2024</figcaption>
+  <div class="chart" id="g-nac"></div>
+  <div class="src" data-fuente="msp_nacimientos" data-det="2024: dato preliminar."></div>
 </figure>
-
-<h3>Diferencias entre departamentos</h3>
-<p>La pobreza infantil (0 a 17 años) varía de forma marcada entre departamentos. Artigas, Cerro Largo y Rivera, en la frontera con Brasil, registran las incidencias más altas.</p>
-<figure>
-  <figcaption class="top"><b>Gráfico 3.</b>Niños y adolescentes (0 a 17 años) en hogares pobres, por departamento, 2024 (%)<em>Las muestras por departamento son chicas: los marcados con * tienen menos de 250 casos y hay que leerlos con cuidado.</em></figcaption>
-  <div class="chart" id="g-dpto"></div>
-  <div class="src" data-fuente="ech2024" data-det="variable pobre17, ponderada con W_ANO."></div>
-</figure>
-
 <!-- ============ 02 ============ -->
 <header class="ch-head">
-  <div class="ch-num"><b>02</b><span>Educación</span></div>
-  <h2>Egreso de la educación media superior: 53% a los 21–23 años</h2>
-  <p class="lede">En 2024, el 53,2% de los jóvenes de 21 a 23 años había terminado la educación media superior (bachillerato en liceo o UTU). El egreso aumenta generación tras generación, aunque a un ritmo moderado, y quienes no egresan muestran mayor desempleo.</p>
+  <div class="ch-num"><b>02</b><span>Educación y jóvenes</span></div>
+  <h2>Casi la mitad de los jóvenes no termina la educación media</h2>
+  <p class="lede">Terminar la educación media (bachillerato en liceo o en UTU) es la puerta de entrada a buena parte de los trabajos formales y a la educación terciaria. En Uruguay, casi la mitad de los jóvenes no la cruza, y los que salen a buscar trabajo encuentran el desempleo juvenil más alto de la región.</p>
 </header>
-
-<h3>Egreso por generación y sexo</h3>
-<p>Entre los mayores de 65 años, el 22,8% terminó la educación media superior; entre los de 21 a 23, el 53,2%. En todas las generaciones el egreso de las mujeres supera al de los hombres; entre los más jóvenes la diferencia es de 10 puntos.</p>
-<figure>
-  <figcaption class="top"><b>Gráfico 4.</b>Personas que terminaron la educación media superior, por generación y sexo (%)<em>Se cuenta como "terminó" a quien completó bachillerato en liceo o UTU, o tiene estudios terciarios. Validación: el INEEd publicó 51,6% para los de 21 a 23 años en 2023; acá da 53,2% en 2024.</em></figcaption>
-  <ul class="legend" id="lg-egreso"></ul>
-  <div class="chart" id="g-egreso"></div>
-  <div class="src" data-fuente="ech2024,ineed" data-det="variables e201_1c, e201_1d y e51_8 a e51_11, ponderadas con W_ANO."></div>
-</figure>
-
-<h3>Ni estudian ni trabajan</h3>
-<p>Entre los jóvenes de 15 a 24 años, el 13,2% de los hombres y el 17,0% de las mujeres no estudian ni tienen trabajo. Las diferencias entre departamentos son amplias, aunque las muestras son reducidas.</p>
-<figure>
-  <figcaption class="top"><b>Gráfico 5.</b>Jóvenes de 15 a 24 años que no estudian ni trabajan, por departamento, 2024 (%)<em>Marcados con *: menos de 200 jóvenes encuestados; son estimaciones con bastante margen de error.</em></figcaption>
-  <div class="chart" id="g-nini"></div>
-  <div class="src" data-fuente="ech2024" data-det="no asiste a ningún centro educativo (variable e49) y no está ocupado (variable POBPCOAC), ponderado con W_ANO."></div>
-</figure>
-
-<div class="two">
-  <div>
-    <h3>Desempleo según nivel educativo</h3>
-    <p>Entre los jóvenes de 18 a 29 años que buscan trabajo, el desempleo es de 22,8% para quienes no terminaron la media superior y de 17,6% para quienes sí. Aun con el ciclo completo, más de 1 de cada 6 jóvenes que buscan trabajo no lo encuentra.</p>
-    <figure>
-      <figcaption class="top"><b>Gráfico 6.</b>Desempleo de jóvenes de 18 a 29 años, según educación, 2024 (%)</figcaption>
-      <div class="chart" id="g-desemp"></div>
-      <div class="src" data-fuente="ech2024" data-det="desocupados / (ocupados + desocupados), ponderado con W_ANO."></div>
-    </figure>
-  </div>
-  <div>
-    <h3>Nacimientos</h3>
-    <p>Los nacimientos pasaron de 48.926 en 2015 a 29.899 en 2024, una caída de 39% y la cifra más baja de la serie. Con cohortes cada vez más chicas, el egreso educativo de cada generación gana peso.</p>
-    <figure>
-      <figcaption class="top"><b>Gráfico 7.</b>Nacimientos por año, 2015–2024</figcaption>
-      <div class="chart" id="g-nac"></div>
-      <div class="src" data-fuente="msp_nacimientos" data-det="2024: dato preliminar."></div>
-    </figure>
-  </div>
+<div class="stats stats3">
+  <div><b>53,2%</b><span>de los jóvenes de 21 a 23 años terminó la educación media (2024)</span></div>
+  <div><b>25,2%</b><span>de desempleo juvenil (15 a 24 años), el más alto de 12 países (2025). Chile: 21,6%; OCDE: 11,6%</span></div>
+  <div><b>35%</b><span>de los adultos de 25 años o más tiene secundaria completa, el más bajo de 11 países (2024). Chile: 70%</span></div>
 </div>
-
-<figure id="fig-actividad" hidden>
-  <figcaption class="top"><b>Gráfico 6b.</b>Situación laboral de todos los jóvenes de 18 a 29 años, según educación, 2024 (%)<em>El desempleo solo cuenta a quienes buscan trabajo; acá se reparte a todos los jóvenes, incluidos los inactivos (no trabajan ni buscan). Entre los que no terminaron, el 14,0% no trabaja, no busca y tampoco estudia; entre los que terminaron, el 4,6%.</em></figcaption>
-  <ul class="legend" id="lg-act"></ul>
-  <div class="chart" id="g-act"></div>
-  <div class="src" data-fuente="ech2024" data-det="condición de actividad (variable POBPCOAC), ponderado con W_ANO."></div>
-</figure>
-
+<p class="small">Se cuenta como "terminó" a quien completó bachillerato en liceo o UTU, o tiene estudios terciarios. Validación: el INEEd publicó 51,6% para los de 21 a 23 años en 2023; acá da 53,2% en 2024. El desempleo juvenil y la secundaria de los adultos salen del Banco Mundial (capítulo 04).</p>
+<div class="src" data-fuente="ech2024,ineed,bm_wdi" data-det="egreso: variables e201_1c, e201_1d y e51_8 a e51_11, ponderadas con W_ANO."></div>
 <!-- ============ 03 ============ -->
 <header class="ch-head">
   <div class="ch-num"><b>03</b><span>Seguridad</span></div>
@@ -263,7 +209,7 @@
 <h3>Homicidios por motivo aparente</h3>
 <p>Los homicidios por conflictos entre criminales pasaron de 77 en 2013 a 215 en 2025. En el mismo período, el resto de los homicidios bajó de 184 a 160: todo el aumento se explica por ese motivo. En 2013 eran 3 de cada 10 homicidios; en 2025, casi 6 de cada 10.</p>
 <figure>
-  <figcaption class="top"><b>Gráfico 8.</b>Homicidios por año: conflictos entre criminales y el resto, 2013–2025<em>La altura de cada barra es el total del año; el número dentro de la barra naranja es el porcentaje de conflictos entre criminales. Motivo aparente según la clasificación del Ministerio del Interior.</em></figcaption>
+  <figcaption class="top"><b>Gráfico 3.</b>Homicidios por año: conflictos entre criminales y el resto, 2013–2025<em>La altura de cada barra es el total del año; el número dentro de la barra naranja es el porcentaje de conflictos entre criminales. Motivo aparente según la clasificación del Ministerio del Interior.</em></figcaption>
   <ul class="legend" id="lg-mot"></ul>
   <div class="chart" id="g-mot"></div>
   <div class="src" data-fuente="mi_homicidios" data-det="una fila por víctima; años completos 2013–2025."></div>
@@ -273,7 +219,7 @@
 <h3 style="margin-top:2mm">Población privada de libertad</h3>
 <p>En diciembre de 2003 había 6.757 personas privadas de libertad y en diciembre de 2024, 16.107: un aumento de 138% (70% si se toma 2013 como base). El crecimiento se aceleró desde 2019; en el mismo período, la cantidad de mujeres presas se multiplicó por cuatro.</p>
 <figure>
-  <figcaption class="top"><b>Gráfico 9.</b>Personas privadas de libertad, dato de diciembre de cada año</figcaption>
+  <figcaption class="top"><b>Gráfico 4.</b>Personas privadas de libertad, dato de diciembre de cada año</figcaption>
   <ul class="legend" id="lg-ppl"></ul>
   <div class="chart" id="g-ppl"></div>
   <div class="src" data-fuente="mi_carceles" data-det="dato de diciembre de cada año."></div>
@@ -287,7 +233,7 @@
 <!-- ============ 04 ============ -->
 <header class="ch-head">
   <div class="ch-num"><b>04</b><span>Comparación regional</span></div>
-  <h2>Liderazgo regional en ingreso e igualdad; rezago en educación y empleo juvenil</h2>
+  <h2>Los más ricos y los más parejos de la región. Y los últimos con sus jóvenes</h2>
   <p class="lede">Con una misma fuente para todos los países, Uruguay registra el mayor ingreso por persona y la menor desigualdad entre 12 países de América Latina, pero el mayor desempleo juvenil y la menor proporción de adultos con secundaria completa. Frente al promedio de la OCDE, queda por detrás en la mayoría de los indicadores con dato.</p>
 </header>
 
@@ -301,12 +247,12 @@
 
 <div class="two">
   <figure>
-    <figcaption class="top"><b>Gráfico 10.</b>Desempleo juvenil, 15 a 24 años (%)<em>Más bajo es mejor.</em></figcaption>
+    <figcaption class="top"><b>Gráfico 5.</b>Desempleo juvenil, 15 a 24 años (%)<em>Más bajo es mejor.</em></figcaption>
     <div class="chart" id="g-rk1"></div>
     <div class="src" data-fuente="bm_wdi" data-det="estimación modelada de la OIT."></div>
   </figure>
   <figure>
-    <figcaption class="top"><b>Gráfico 11.</b>Adultos de 25 años o más con secundaria completa (%)<em>Más alto es mejor.</em></figcaption>
+    <figcaption class="top"><b>Gráfico 6.</b>Adultos de 25 años o más con secundaria completa (%)<em>Más alto es mejor.</em></figcaption>
     <div class="chart" id="g-rk2"></div>
     <div class="src" data-fuente="bm_wdi" data-det="datos de la UNESCO."></div>
   </figure>
@@ -314,52 +260,49 @@
 
 <!-- ============ 05 ============ -->
 <header class="ch-head">
-  <div class="ch-num"><b>05</b><span>Fortalezas</span></div>
-  <h2>Fortalezas institucionales y transformación de la matriz eléctrica</h2>
-  <p class="lede">Con la misma fuente y los mismos 12 países, Uruguay ocupa el primer puesto en cuatro indicadores de calidad institucional (control de la corrupción, estado de derecho, libertades y estabilidad política), en generación eléctrica renovable no hidráulica y en conexiones de banda ancha fija por habitante.</p>
+  <div class="ch-num"><b>05</b><span>Lo que sí funciona</span></div>
+  <h2>Las instituciones, la mejor base de la región</h2>
+  <p class="lede">Con la misma fuente y los mismos 12 países, Uruguay es primero en control de la corrupción, estado de derecho, libertades y estabilidad política. El problema no es la capacidad del Estado.</p>
 </header>
-
-<h3>Indicadores en los que Uruguay ocupa el primer puesto</h3>
 <figure>
   <figcaption class="top"><b>Tabla 2.</b>Indicadores en los que Uruguay ocupa el 1.<sup>er</sup> puesto entre 12 países<em>Los cuatro primeros son puntajes de 0 a 100 que combinan encuestas y evaluaciones de expertos: miden percepciones, no hechos contados uno por uno.</em></figcaption>
   <table class="t" id="t-fort"></table>
   <div class="src" data-fuente="bm_wgi,bm_wdi" data-det="instituciones: puntajes 2025; electricidad: 2021; internet: 2024."></div>
 </figure>
-
-<h3>Generación eléctrica renovable no hidráulica</h3>
-<p>En 2012, el 13% de la electricidad generada en Uruguay provenía del viento, el sol o la biomasa; en 2021, el 51%, tres veces el promedio de la OCDE (17%). Ningún país de la comparación se acerca a ese nivel. El dato corresponde a la <b>matriz eléctrica</b>; la matriz energética total, que incluye el combustible del transporte y la industria, es una medición distinta.</p>
-<p>Detrás de ese cambio hubo una política de Estado: en 2008 el Poder Ejecutivo aprobó la Política Energética 2005–2030, y en 2010 los cuatro partidos con representación parlamentaria la respaldaron en un acuerdo multipartidario. Desde 2011 se licitaron parques eólicos, y la política se mantuvo con gobiernos de distinto signo.</p>
-<p>El porcentaje cambia año a año según el clima: cuando las represas tienen más agua, la generación hidráulica pesa más. La serie del Banco Mundial, que permite comparar países, llega hasta 2021. El dato más reciente de Uruguay es del MIEM: en 2025 (preliminar), el viento generó el 34% de la electricidad, la biomasa el 14% y el sol el 4%, un 52% en total. Contando las represas, el 98% de la electricidad fue renovable.</p>
-<figure>
-  <figcaption class="top"><b>Gráfico 12.</b>Electricidad generada con viento, sol y biomasa, sin contar las represas (% del total)</figcaption>
-  <ul class="legend" id="lg-ren"></ul>
-  <div class="chart" id="g-ren"></div>
-  <div class="src" data-fuente="bm_wdi,miem_energia,miem_2025" data-det="código del indicador: EG.ELC.RNWX.ZS, 2012–2021."></div>
-</figure>
+<h3>Cuando el país se puso de acuerdo, funcionó</h3>
+<p>La energía es el ejemplo. En 2008 el gobierno aprobó la Política Energética 2005–2030 y en 2010 los cuatro partidos con representación parlamentaria la respaldaron en un acuerdo. Desde 2011 se licitaron parques eólicos y la política se mantuvo con gobiernos de distinto signo.</p>
+<div class="steps">
+  <div><b><i>2008</i></b>Se aprueba la Política Energética 2005–2030.</div>
+  <div><b><i>2010</i></b>Acuerdo de los cuatro partidos con representación parlamentaria.</div>
+  <div><b><i>2012</i></b>El 13% de la electricidad sale del viento, el sol y la biomasa.</div>
+  <div><b><i>2021</i></b>Llega al 51%; el promedio de la OCDE es 17%.</div>
+  <div><b><i>2025</i></b>El 98% de la electricidad es renovable, contando las represas.</div>
+</div>
+<p>Un rumbo acordado entre todos y sostenido en el tiempo cambió un indicador en pocos años. Ese acuerdo todavía no existe para la niñez, la educación y el empleo de los jóvenes.</p>
+<div class="src" data-fuente="miem_energia,bm_wdi,miem_2025" data-det="electricidad sin hidráulica: indicador EG.ELC.RNWX.ZS, 2012–2021; 2025: dato preliminar del MIEM."></div>
 <!-- ============ 06 ============ -->
 <header class="ch-head">
   <div class="ch-num"><b>06</b><span>Conclusión</span></div>
   <h2>Las instituciones funcionan. Los resultados para los chicos y los jóvenes, no.</h2>
-  <p class="lede">Entre los 12 países comparados, Uruguay es primero en control de la corrupción, estado de derecho, libertades y estabilidad política. Al mismo tiempo, es último en desempleo juvenil y en adultos con secundaria completa, y 1 de cada 3 niños de 0 a 5 años vive en un hogar pobre.</p>
+  <p class="lede">Entre los 12 países comparados, Uruguay es primero en control de la corrupción, estado de derecho, libertades y estabilidad política. Al mismo tiempo, es último en desempleo juvenil y en adultos con secundaria completa, y casi 3 de cada 10 niños de 0 a 5 años viven en hogares pobres.</p>
 </header>
 <h3>Todos los indicadores en una sola imagen</h3>
 <p>Cada fila es un indicador de los capítulos 04 y 05. Los puntos grises son los demás países, ordenados del mejor (izquierda) al peor (derecha), y el círculo de color marca el puesto de Uruguay.</p>
 <figure>
-  <figcaption class="top"><b>Gráfico 13.</b>Puesto de Uruguay entre los países de la región, último dato disponible</figcaption>
+  <figcaption class="top"><b>Gráfico 7.</b>Puesto de Uruguay entre los países de la región, último dato disponible</figcaption>
   <ul class="legend" id="lg-contraste"></ul>
   <div class="chart" id="g-contraste"></div>
   <div class="src" data-fuente="bm_wdi,bm_wgi" data-det="mismos datos y reglas que los capítulos 04 y 05."></div>
 </figure>
 <h3>Lo que muestran los datos</h3>
 <ol class="findings">
-  <li><p><b>No es un problema de Estado débil.</b> Uruguay tiene las instituciones mejor evaluadas de la región. Los malos resultados no se explican por corrupción ni por inestabilidad.</p></li>
-  <li><p><b>La pobreza está en los chicos.</b> El 32% de los niños de 0 a 5 años vive en hogares pobres, contra el 6% de los mayores de 65. Y cada año nacen menos niños: 39% menos que en 2015.</p></li>
-  <li><p><b>A los jóvenes les cuesta arrancar.</b> Casi la mitad no termina la educación media, y el desempleo juvenil es el más alto de los 12 países.</p></li>
-  <li><p><b>Ser el mejor de la región no alcanza.</b> Uruguay tiene el mayor ingreso por persona del grupo, pero es el 60% del promedio de la OCDE. Compararse con los vecinos deja la vara baja.</p></li>
+  <li><p><b>Las instituciones no son el problema.</b> Son las mejor evaluadas de la región.</p></li>
+  <li><p><b>Los más pobres son los niños.</b> Casi 3 de cada 10 menores de 6 años, cinco veces más que los mayores de 65.</p></li>
+  <li><p><b>Cada vez hay menos niños.</b> Nacen 39% menos que en 2015.</p></li>
+  <li><p><b>A los jóvenes les cuesta arrancar.</b> Casi la mitad no termina la educación media y el desempleo juvenil es el más alto de la región.</p></li>
+  <li><p><b>La violencia cambió de forma.</b> Todo el aumento de homicidios es entre criminales, y hay 2,4 veces más presos que en 2003.</p></li>
+  <li><p><b>La vara de la región es baja.</b> Ser el más rico del barrio no alcanza: el ingreso por persona es el 60% del de la OCDE.</p></li>
 </ol>
-<h3>Lectura del autor</h3>
-<p class="small" style="text-transform:uppercase;letter-spacing:.08em;font-weight:700">Opinión del autor, no un resultado de los datos</p>
-<p>La electricidad muestra que Uruguay puede dar un salto cuando se lo propone: con una política acordada por todos los partidos y sostenida por gobiernos de distinto signo, pasó del 13% al 51% de electricidad de viento, sol y biomasa en nueve años, y hoy lidera la región. Con la niñez, la educación y el empleo de los jóvenes no hubo un acuerdo así. Las instituciones que tenemos son la base para hacerlo.</p>
 <p style="font-size:12pt;font-weight:600;color:var(--ink);border-left:2.5px solid var(--acc);padding-left:4mm;margin-top:6mm">La pregunta no es si Uruguay está mejor que el resto. Es si está bien. Y para los chicos y los jóvenes, los datos dicen que no.</p>
 
 <!-- ============ ANEXO A ============ -->
@@ -380,17 +323,16 @@
 <table class="t">
   <thead><tr><th style="width:17%">Capítulo</th><th style="width:22%">Fuente</th><th>Qué se calculó</th><th style="width:16%">Notebook</th></tr></thead>
   <tbody>
-    <tr><td>01 Pobreza infantil</td><td>INE, ECH 2024 y 2025 (microdatos, ~55.000 personas por año)</td><td>% de personas en hogares bajo la línea de pobreza, por edad y departamento, ponderado con W_ANO.</td><td>01_pobreza</td></tr>
-    <tr><td>02 Educación</td><td>INE, ECH 2024; MSP (nacimientos)</td><td>Egreso de media superior, jóvenes que no estudian ni trabajan, desempleo según educación, nacimientos 2015–2024.</td><td>02_educacion, 04_demografia</td></tr>
+    <tr><td>01 Pobreza infantil y natalidad</td><td>INE, ECH 2025 (microdatos, ~55.000 personas); MSP (nacimientos)</td><td>% de personas en hogares bajo la línea de pobreza, por tramo de edad, ponderado con W_ANO; nacimientos 2015–2024.</td><td>01_pobreza, 04_demografia</td></tr>
+    <tr><td>02 Educación y jóvenes</td><td>INE, ECH 2024; Banco Mundial</td><td>Egreso de media superior a los 21–23 años; desempleo juvenil y secundaria completa de adultos frente a la región.</td><td>02_educacion, 05_comparacion_regional</td></tr>
     <tr><td>03 Homicidios y cárceles</td><td>Ministerio del Interior, datos abiertos y ejecución presupuestal por programa</td><td>Homicidios por año y motivo aparente (una fila por víctima); personas presas en diciembre de cada año; gasto del programa de cárceles por persona presa.</td><td>03_seguridad</td></tr>
     <tr><td>04 Región</td><td>Banco Mundial (WDI), con datos del FMI, la OIT, la UNODC y la UNESCO</td><td>9 indicadores comparables para 12 países (10 de Sudamérica, Costa Rica y México), América Latina y la OCDE; posición según el puesto.</td><td>05_comparacion_regional</td></tr>
-    <tr><td>05 Lo que sí funciona</td><td>Banco Mundial (WGI y WDI)</td><td>Último dato de 6 indicadores para los mismos 12 países y evolución de la electricidad renovable sin hidro.</td><td>06_fortalezas</td></tr>
+    <tr><td>05 Lo que sí funciona</td><td>Banco Mundial (WGI y WDI); MIEM</td><td>Último dato de 6 indicadores para los mismos 12 países; hitos de la política energética.</td><td>06_fortalezas</td></tr>
   </tbody>
 </table>
 <h3>Limitaciones</h3>
 <ul class="lim">
-  <li>La ECH 2025 es de implantación, así que la comparación con 2024 es indicativa.</li>
-  <li>Las estimaciones por departamento tienen muestras chicas; en los gráficos se marcan con asterisco.</li>
+  <li>La ECH 2025 es el primer año con el nuevo diseño de la encuesta (implantación), así que no se compara con años anteriores.</li>
   <li>El egreso de media superior se validó contra el INEEd: 51,6% publicado para 2023 frente a 53,2% calculado para 2024.</li>
   <li>El Ministerio del Interior reclasifica casos, así que puede haber diferencias de pocas unidades con sus informes anuales.</li>
   <li>Gasto en cárceles: el Ministerio del Interior publica la ejecución por programa solo para 2023 y 2024, como tabla web; las cifras se transcribieron. No incluye costos de otros organismos.</li>

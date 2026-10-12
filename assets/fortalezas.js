@@ -72,6 +72,7 @@
 
   // ---------- evolución de la electricidad renovable sin hidro ----------
   function renderRen() {
+    if (!document.getElementById("chart-ren")) return;
     const ID = "EG.ELC.RNWX.ZS";
     const SER = [["URY", "Uruguay", css("--good"), 3, null], ["OED", "Promedio OCDE", css("--s1"), 2, "6 4"], ["LCN", "América Latina y el Caribe", css("--ref"), 2, "2 4"]];
     document.getElementById("legend-ren").innerHTML = SER.map(([, n, c, , dash]) =>

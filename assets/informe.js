@@ -17,7 +17,7 @@
   // ---------- portada y fecha ----------
   document.getElementById("mes").textContent = new Date().toLocaleDateString("es-UY", { month: "long", year: "numeric" });
   document.getElementById("cover-kpis").innerHTML = [
-    ["32%", "de los niños de 0 a 5 años vive en hogares pobres"],
+    ["29%", "de los niños de 0 a 5 años vive en hogares pobres"],
     ["47%", "de los jóvenes de 21 a 23 años no terminó la educación media"],
     ["375", "homicidios en 2025, más de la mitad entre criminales"],
     ["−39%", "nacimientos entre 2015 y 2024"],
@@ -44,42 +44,20 @@
     vals.forEach((v) => T(svg.append("text").attr("x", x(v)).attr("y", H - m.b + 15).attr("text-anchor", "middle").attr("fill", C.muted).text(fmt(v)), 9.5));
   }
 
-  // ---------- G1: pobreza por tramo ----------
+  // ---------- G1: pobreza por tramo (2025) ----------
   (() => {
-    legend("lg-tramo", [[C.blue, "2024"], [C.acc, "2025"]]);
     const tramos = ["0-5", "6-12", "13-17", "18-64", "65+"], lab = { "0-5": "0 a 5", "6-12": "6 a 12", "13-17": "13 a 17", "18-64": "18 a 64", "65+": "65 o más" };
-    const W = FULL, H = 210, m = { t: 14, r: 4, b: 24, l: 34 };
-    const svg = svgIn("g-tramo", W, H, "Pobreza por tramo de edad 2024 y 2025");
-    const x = d3.scaleBand().domain(tramos).range([m.l, W - m.r]).paddingInner(0.3).paddingOuter(0.1);
-    const xi = d3.scaleBand().domain([2024, 2025]).range([0, x.bandwidth()]).paddingInner(0.08);
+    const W = FULL, H = 200, m = { t: 16, r: 4, b: 24, l: 34 };
+    const svg = svgIn("g-tramo", W, H, "Pobreza por tramo de edad 2025");
+    const x = d3.scaleBand().domain(tramos).range([m.l, W - m.r]).paddingInner(0.35).paddingOuter(0.1);
     const y = d3.scaleLinear().domain([0, 40]).range([H - m.b, m.t]);
     yAxis(svg, y, W, m, 4, (d) => d + "%");
-    tramo.forEach((d) => {
-      const c = d.anio === 2024 ? C.blue : C.acc, x0 = x(d.tramo) + xi(d.anio);
-      svg.append("rect").attr("x", x0).attr("y", y(d.pct_pobreza)).attr("width", xi.bandwidth()).attr("height", y(0) - y(d.pct_pobreza)).attr("fill", c);
-      T(svg.append("text").attr("x", x0 + xi.bandwidth() / 2).attr("y", y(d.pct_pobreza) - 4).attr("text-anchor", "middle").attr("fill", C.ink).style("font-weight", 600).text(n1(d.pct_pobreza)), 9.5);
+    tramo.filter((d) => d.anio === 2025).forEach((d) => {
+      const c = d.orden <= 3 ? C.acc : C.gray;
+      svg.append("rect").attr("x", x(d.tramo)).attr("y", y(d.pct_pobreza)).attr("width", x.bandwidth()).attr("height", y(0) - y(d.pct_pobreza)).attr("fill", c);
+      T(svg.append("text").attr("x", x(d.tramo) + x.bandwidth() / 2).attr("y", y(d.pct_pobreza) - 4).attr("text-anchor", "middle").attr("fill", C.ink).style("font-weight", 700).text(n1(d.pct_pobreza) + "%"), 10);
     });
     tramos.forEach((t) => T(svg.append("text").attr("x", x(t) + x.bandwidth() / 2).attr("y", H - m.b + 15).attr("text-anchor", "middle").attr("fill", C.ink2).text(lab[t] + " años"), 10));
-  })();
-
-  // ---------- G2: pobreza por edad simple ----------
-  (() => {
-    legend("lg-edad", [[C.blue, "2024", 1], [C.acc, "2025", 1]]);
-    const W = FULL, H = 220, m = { t: 12, r: 14, b: 24, l: 34 };
-    const svg = svgIn("g-edad", W, H, "Pobreza por edad simple");
-    const x = d3.scaleLinear().domain([0, 90]).range([m.l, W - m.r]);
-    const y = d3.scaleLinear().domain([0, 40]).range([H - m.b, m.t]);
-    svg.append("rect").attr("x", x(0)).attr("y", m.t).attr("width", x(17.5) - x(0)).attr("height", H - m.b - m.t).attr("fill", "#f6f1ee");
-    T(svg.append("text").attr("x", x(0) + 5).attr("y", m.t + 12).attr("fill", C.muted).text("Niñez (0 a 17)"), 9.5);
-    yAxis(svg, y, W, m, 4, (d) => d + "%");
-    xLabels(svg, x, H, m, [0, 6, 13, 18, 30, 45, 65, 80, 90], (d) => d);
-    [[2024, C.blue], [2025, C.acc]].forEach(([a, c]) => {
-      const s = edad.filter((d) => d.anio === a).sort((p, q) => p.edad - q.edad);
-      const mm = s.map((d, i) => ({ edad: d.edad, v: d3.mean(s.slice(Math.max(0, i - 1), i + 2), (z) => z.pct_pobreza) }));
-      s.forEach((d) => svg.append("circle").attr("cx", x(d.edad)).attr("cy", y(d.pct_pobreza)).attr("r", 1.5).attr("fill", c).attr("opacity", 0.35));
-      svg.append("path").datum(mm).attr("fill", "none").attr("stroke", c).attr("stroke-width", 1.6)
-        .attr("d", d3.line().x((d) => x(d.edad)).y((d) => y(d.v)).curve(d3.curveMonotoneX));
-    });
   })();
 
   // ---------- barras horizontales genéricas ----------
@@ -96,58 +74,6 @@
       T(svg.append("text").attr("x", x(d.v) + 5).attr("y", yy + rowH / 2).attr("dy", "0.33em").attr("fill", C.ink).style("font-weight", d.hi ? 700 : 500).text(fmt(d.v)), 9.5);
     });
   }
-
-  // ---------- G3: pobreza infantil por departamento ----------
-  (() => {
-    const rows = dpto.filter((d) => d.anio === 2024).sort((a, b) => b.pct_pobreza - a.pct_pobreza)
-      .map((d) => ({ label: d.nom_dpto, v: d.pct_pobreza, n: d.n_muestra, hi: false }));
-    const prom = d3.scaleLinear().domain([15, 52]).range([0.35, 1]);
-    hbars("g-dpto", rows, { max: 60, mark: (d) => d.n < 250, color: (d) => d3.interpolateRgb("#c7daf3", "#1d4f91")(prom(d.v)) });
-  })();
-
-  // ---------- G4: egreso por generación (dumbbell) ----------
-  (() => {
-    legend("lg-egreso", [[C.blue, "Hombres"], [C.acc, "Mujeres"], [C.ink, "Total", 1]]);
-    const ORD = ["65+", "50-64", "40-49", "30-39", "25-29", "21-23"];
-    const ET = { "65+": "65 años o más", "50-64": "50 a 64", "40-49": "40 a 49", "30-39": "30 a 39", "25-29": "25 a 29", "21-23": "21 a 23" };
-    const rows = ORD.map((g) => egreso.find((d) => d.generacion === g)).filter(Boolean);
-    const W = FULL, rowH = 26, m = { t: 18, r: 50, b: 4, l: 104 }, H = m.t + m.b + rows.length * rowH;
-    const svg = svgIn("g-egreso", W, H, "Egreso de media superior por generación");
-    const x = d3.scaleLinear().domain([0, 70]).range([m.l, W - m.r]);
-    [0, 25, 50].forEach((t) => {
-      svg.append("line").attr("x1", x(t)).attr("x2", x(t)).attr("y1", m.t - 4).attr("y2", H - m.b).attr("stroke", C.grid);
-      T(svg.append("text").attr("x", x(t)).attr("y", m.t - 8).attr("text-anchor", "middle").attr("fill", C.muted).text(t + "%"), 9.5);
-    });
-    rows.forEach((d, i) => {
-      const yy = m.t + i * rowH + rowH / 2;
-      T(svg.append("text").attr("x", m.l - 10).attr("y", yy).attr("dy", "0.33em").attr("text-anchor", "end").attr("fill", C.ink2)
-        .style("font-weight", d.generacion === "21-23" ? 700 : 400).text(ET[d.generacion]), 10);
-      svg.append("line").attr("x1", x(d.Hombres)).attr("x2", x(d.Mujeres)).attr("y1", yy).attr("y2", yy).attr("stroke", C.gray).attr("stroke-width", 2.2);
-      svg.append("line").attr("x1", x(d.pct_total)).attr("x2", x(d.pct_total)).attr("y1", yy - 7).attr("y2", yy + 7).attr("stroke", C.ink).attr("stroke-width", 1.6);
-      svg.append("circle").attr("cx", x(d.Hombres)).attr("cy", yy).attr("r", 5).attr("fill", C.blue);
-      svg.append("circle").attr("cx", x(d.Mujeres)).attr("cy", yy).attr("r", 5).attr("fill", C.acc);
-      T(svg.append("text").attr("x", x(Math.max(d.Hombres, d.Mujeres)) + 10).attr("y", yy).attr("dy", "0.33em").attr("fill", C.ink).style("font-weight", 600).text(n1(d.pct_total)), 9.5);
-    });
-  })();
-
-  // ---------- G5: ni-ni por departamento (dos columnas) ----------
-  (() => {
-    const rows = nini.slice().sort((a, b) => b.pct_nini - a.pct_nini).map((d) => ({ label: d.departamento, v: d.pct_nini, n: d.n_muestra }));
-    const host = document.getElementById("g-nini");
-    host.style.display = "grid"; host.style.gridTemplateColumns = "1fr 1fr"; host.style.columnGap = "7mm";
-    const half = Math.ceil(rows.length / 2);
-    host.innerHTML = '<div id="g-nini-a"></div><div id="g-nini-b"></div>';
-    const opts = { W: HALF, max: 30, labelW: 92, mark: (d) => d.n < 200, color: () => C.blue };
-    hbars("g-nini-a", rows.slice(0, half), opts);
-    hbars("g-nini-b", rows.slice(half), opts);
-  })();
-
-  // ---------- G6: desempleo según educación ----------
-  (() => {
-    const ord = ["No terminó el liceo", "Terminó el liceo"];
-    const rows = ord.map((k) => desemp.find((d) => d.educacion === k)).map((d) => ({ label: d.educacion.replace("el liceo", "la media"), v: d.pct_desempleo }));
-    hbars("g-desemp", rows, { W: HALF, rowH: 30, max: 30, labelW: 112, color: (d) => (d.label === "Terminó la media" ? C.blue : C.bad) });
-  })();
 
   // ---------- barras verticales por año ----------
   function vbars(id, rows, key, { W, H, color, labels = "ends", fmt = int, yfmt = int }) {
@@ -166,33 +92,8 @@
     return { svg, x, y };
   }
 
-  // ---------- actividad de los jóvenes (si existe el dato) ----------
-  try {
-    const act = await d3.json("data/educacion/educacion_actividad.json");
-    if (act && act.length) {
-      document.getElementById("fig-actividad").hidden = false;
-      const K = [["pct_ocupados", "Trabajan", C.blue], ["pct_desocupados", "Buscan y no consiguen", C.bad], ["pct_inactivos", "Ni trabajan ni buscan", C.gray]];
-      legend("lg-act", K.map(([, l, c]) => [c, l]));
-      const rows = ["No terminó el liceo", "Terminó el liceo"].map((k) => act.find((d) => d.educacion === k)).filter(Boolean);
-      const W = FULL, rowH = 30, m = { t: 2, r: 4, b: 2, l: 120 }, H = m.t + m.b + rows.length * rowH;
-      const svg = svgIn("g-act", W, H, "Actividad de los jóvenes");
-      const x = d3.scaleLinear().domain([0, 100]).range([m.l, W - m.r]);
-      rows.forEach((d, i) => {
-        const y0 = m.t + i * rowH + 5, bh = rowH - 10;
-        T(svg.append("text").attr("x", m.l - 8).attr("y", y0 + bh / 2).attr("dy", "0.33em").attr("text-anchor", "end").attr("fill", C.ink2).text(d.educacion.replace("el liceo", "la media")), 10);
-        let acc = 0;
-        K.forEach(([k, , c]) => {
-          const v = d[k];
-          svg.append("rect").attr("x", x(acc)).attr("y", y0).attr("width", x(acc + v) - x(acc)).attr("height", bh).attr("fill", c);
-          if (v >= 7) T(svg.append("text").attr("x", x(acc + v / 2)).attr("y", y0 + bh / 2).attr("dy", "0.33em").attr("text-anchor", "middle").attr("fill", "#fff").style("font-weight", 700).text(n1(v)), 9.5);
-          acc += v;
-        });
-      });
-    }
-  } catch (e) { /* todavía no existe el dato */ }
-
   // ---------- G7: nacimientos ----------
-  vbars("g-nac", nac, "nacimientos", { W: HALF, H: 170, color: C.blue, yfmt: (d) => (d / 1000) + " mil", fmt: (v) => (v / 1000).toLocaleString("es-UY", { maximumFractionDigits: 1 }) + " mil" });
+  vbars("g-nac", nac, "nacimientos", { W: FULL, H: 190, labels: "all", color: C.blue, yfmt: (d) => (d / 1000) + " mil", fmt: (v) => (v / 1000).toLocaleString("es-UY", { maximumFractionDigits: 1 }) + " mil" });
 
   // ---------- capítulo 03: cifras ----------
   (() => {
@@ -317,29 +218,6 @@
         <td>${NOM[s.iso3]} (${f(s.valor)})</td><td class="n">${lc ? f(lc.valor) : "—"}</td><td class="n">${oc ? f(oc.valor) + (oc.anio !== u.anio ? ` (${oc.anio})` : "") : "—"}</td></tr>`;
     }).join("");
     document.getElementById("t-fort").innerHTML = head + `<tbody>${body}</tbody>`;
-  })();
-
-  // ---------- G12: electricidad renovable ----------
-  (() => {
-    const SER = [["URY", "Uruguay", C.good, 2.4], ["OED", "Promedio OCDE", C.blue, 1.5], ["LCN", "América Latina y el Caribe", C.gray, 1.5]];
-    legend("lg-ren", SER.map(([, n, c]) => [c, n, 1]));
-    const W = FULL, H = 210, m = { t: 14, r: 40, b: 24, l: 34 };
-    const svg = svgIn("g-ren", W, H, "Electricidad renovable sin hidro");
-    const x = d3.scaleLinear().domain([2012, 2021]).range([m.l, W - m.r]);
-    const y = d3.scaleLinear().domain([0, 70]).range([H - m.b, m.t]);
-    yAxis(svg, y, W, m, 4, (d) => d + "%");
-    xLabels(svg, x, H, m, d3.range(2012, 2022, 1), (d) => d);
-    SER.slice().reverse().forEach(([iso, , c, sw]) => {
-      const s = fort.filter((d) => d.indicador === "EG.ELC.RNWX.ZS" && d.iso3 === iso && d.anio >= 2012).sort((a, b) => a.anio - b.anio);
-      svg.append("path").datum(s).attr("fill", "none").attr("stroke", c).attr("stroke-width", sw).attr("d", d3.line().x((d) => x(d.anio)).y((d) => y(d.valor)));
-      const l = s[s.length - 1];
-      T(svg.append("text").attr("x", x(l.anio) + 6).attr("y", y(l.valor) + (iso === "LCN" ? 6 : iso === "OED" ? -4 : 0)).attr("dy", "0.33em")
-        .attr("fill", iso === "LCN" ? C.muted : c).style("font-weight", iso === "URY" ? 700 : 500).text(Math.round(l.valor) + "%"), 10);
-      if (iso === "URY") {
-        svg.append("circle").attr("cx", x(s[0].anio)).attr("cy", y(s[0].valor)).attr("r", 3.5).attr("fill", c);
-        T(svg.append("text").attr("x", x(s[0].anio) + 6).attr("y", y(s[0].valor) - 9).attr("fill", c).style("font-weight", 700).text(Math.round(s[0].valor) + "%"), 10);
-      }
-    });
   })();
 
   // ---------- G13: puesto de Uruguay en todos los indicadores ----------

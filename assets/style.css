@@ -510,3 +510,31 @@ abbr.sigla:focus-visible { outline: 2px solid var(--s1); outline-radius: 3px; }
   border: 3px solid var(--surface); box-shadow: 0 0 0 2px var(--s2), 0 8px 24px rgba(0,0,0,.12); }
 .autor-rol { margin: 0 !important; font-size: 15px; color: var(--muted) !important; }
 @media (max-width: 480px) { .autor-foto { width: 84px; height: 84px; } .autor-head { gap: 14px; } }
+
+/* educación: tres cifras */
+.stats-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 680px) { .stats-3 { grid-template-columns: 1fr; } }
+/* energía: hitos */
+.hito { list-style: none; padding: 0; margin: 8px 0 20px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; max-width: 920px; }
+.hito li { background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--good); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 4px; }
+.hito b { font-size: 18px; letter-spacing: -0.01em; }
+.hito span { font-size: 14px; color: var(--ink-2); line-height: 1.45; }
+.hito strong { color: var(--good); }
+@media (max-width: 760px) { .hito { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 460px) { .hito { grid-template-columns: 1fr; } }
+/* conclusión: seis tarjetas */
+.concl-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 860px) { .concl-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* íconos de contacto */
+.ico { width: 16px; height: 16px; flex: none; }
+.ico-in { color: #0a66c2; } .ico-gm { color: #ea4335; } .ico-gh { color: var(--ink); }
+:root[data-theme="dark"] .ico-in { color: #4d9de8; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .ico-in { color: #4d9de8; } }
+.contacto { gap: 8px 10px; }
+.contacto .contact-btn { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border: 1px solid var(--border); border-radius: 999px;
+  background: var(--surface); color: var(--ink); font-weight: 600; font-size: 14px; text-decoration: none; transition: border-color .15s, transform .15s; }
+.contacto .contact-btn:hover { border-color: var(--ink-2); text-decoration: none; transform: translateY(-1px); color: var(--ink); }
+.foot-link { display: inline-flex; align-items: center; gap: 6px; vertical-align: middle; }
+.foot-link .ico { width: 14px; height: 14px; }
+.contact-lbl { flex-basis: 100%; }

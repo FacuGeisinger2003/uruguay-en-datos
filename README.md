@@ -12,9 +12,8 @@
 
 | Tema | Dato | Fuente |
 |---|---|---|
-| Pobreza infantil | **32,2%** de los niños de 0 a 5 años vive en hogares pobres, contra **6,3%** de los mayores de 65 (2024) | INE, ECH 2024 |
-| Educación | Solo el **53,2%** de los jóvenes de 21 a 23 años terminó la educación media superior (2024) | INE, ECH 2024 |
-| Educación y empleo | Desempleo de 18 a 29 años: **22,8%** sin educación media completa y **17,6%** con educación media completa | INE, ECH 2024 |
+| Pobreza infantil | **29,1%** de los niños de 0 a 5 años vive en hogares pobres, contra **6,0%** de los mayores de 65 (2025) | INE, ECH 2025 |
+| Educación y jóvenes | Solo el **53,2%** de los jóvenes de 21 a 23 años terminó la educación media superior (2024), y el desempleo juvenil (**25,2%**) es el más alto de 12 países de la región | INE, ECH 2024; Banco Mundial |
 | Homicidios | Los homicidios por conflictos entre criminales pasaron de **77** (2013) a **215** (2025) | Ministerio del Interior |
 | Cárceles | La población presa pasó de **6.757** (2003) a **16.107** (2024) | Ministerio del Interior |
 | Costo de las cárceles | Cada persona presa cuesta unos **$ 31.000 por mes** (2024), 1,4 salarios mínimos | Ministerio del Interior (ejecución presupuestal) |
@@ -66,8 +65,7 @@ La web lee esos JSON y los dibuja con D3.js. Debajo de cada gráfico aparece su 
 
 **Limitaciones**
 
-- La ECH 2025 es de implantación, así que la comparación con 2024 es indicativa.
-- Las estimaciones por departamento tienen muestras chicas, y el sitio las marca.
+- La ECH 2025 es el primer año con el nuevo diseño de la encuesta (implantación), así que la web usa 2025 sin compararlo con años anteriores.
 - Nacimientos: no hay un dataset abierto actualizado del MSP, así que las cifras se transcribieron de su informe oficial, con la fuente en cada fila.
 - Gasto en cárceles: el Ministerio del Interior publica la ejecución por programa solo como tabla web (2023 y 2024), así que se transcribió. Es el gasto del programa 461 (*Gestión de la privación de libertad*); costos registrados en otros organismos, como la salud a cargo de ASSE, no están incluidos.
 
