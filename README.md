@@ -4,7 +4,7 @@
 
 🔗 **Sitio:** [datos-criticos-uy.vercel.app](https://datos-criticos-uy.vercel.app/)
 
-![Portada del sitio](docs/portada.png)
+![Portada del sitio](docs/portada_2.png)
 
 ---
 
