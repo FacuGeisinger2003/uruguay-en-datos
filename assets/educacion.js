@@ -1,8 +1,8 @@
-// Capítulo 02 — Educación (datos: data/educacion_*.json, notebook 05_educacion)
+// Capítulo 02 — Educación (datos: data/educacion/*.json, notebook 02_educacion)
 (async function () {
   const [egreso, niniSexo] = await Promise.all([
-    d3.json("data/educacion_egreso_generacion.json"),
-    d3.json("data/educacion_nini_sexo.json"),
+    d3.json("data/educacion/educacion_egreso_generacion.json"),
+    d3.json("data/educacion/educacion_nini_sexo.json"),
   ]);
 
   const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
@@ -63,7 +63,7 @@
 
   // ---------- 4. actividad de todos los jóvenes (aparece cuando existe el JSON) ----------
   let actividad = null;
-  try { actividad = await d3.json("data/educacion_actividad.json"); } catch (e) { actividad = null; }
+  try { actividad = await d3.json("data/educacion/educacion_actividad.json"); } catch (e) { actividad = null; }
   function renderActividad() {
     if (!actividad || !actividad.length) return;
     document.getElementById("card-actividad").hidden = false;

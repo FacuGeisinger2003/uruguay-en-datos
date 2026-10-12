@@ -14,6 +14,9 @@
   --no-pobre: #e1e0d9;
   --warn: #d03b3b;
   --ref: #b5b3ab;
+  --c3: #1baf7a;   /* aqua */
+  --c4: #eda100;   /* amarillo */
+  --c5: #e87ba4;   /* magenta */
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -32,6 +35,7 @@
     --no-pobre: #383835;
     --warn: #e66767;
     --ref: #6f6e68;
+    --c3: #199e70; --c4: #c98500; --c5: #d55181;
   }
 }
 :root[data-theme="dark"] {
@@ -40,6 +44,7 @@
   --muted: #898781; --grid: #2c2c2a; --axis: #383835;
   --border: rgba(255, 255, 255, 0.10);
   --s1: #3987e5; --s2: #d95926; --pobre: #d95926; --no-pobre: #383835; --warn: #e66767; --ref: #6f6e68;
+  --c3: #199e70; --c4: #c98500; --c5: #d55181;
 }
 
 * { box-sizing: border-box; }
@@ -132,11 +137,11 @@ footer { color: var(--muted); font-size: 14px; border-top: 1px solid var(--borde
   position: fixed; z-index: 10; pointer-events: none;
   background: var(--surface); color: var(--ink); border: 1px solid var(--border);
   box-shadow: 0 4px 16px rgba(0,0,0,.12); border-radius: 10px; padding: 8px 12px;
-  font-size: 13px; line-height: 1.4; max-width: 240px;
+  font-size: 13px; line-height: 1.4; max-width: 290px;
 }
 .tip b { font-weight: 600; }
 .tip .row { display: flex; align-items: center; gap: 6px; color: var(--ink-2); }
-.tip .row strong { color: var(--ink); margin-left: auto; padding-left: 12px; font-variant-numeric: tabular-nums; }
+.tip .row strong { color: var(--ink); margin-left: auto; padding-left: 12px; font-variant-numeric: tabular-nums; white-space: nowrap; }
 
 .toc { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
 .toc a { display: inline-flex; align-items: baseline; gap: 8px; padding: 8px 14px; border: 1px solid var(--border); border-radius: 999px;
@@ -469,3 +474,39 @@ abbr.sigla:focus-visible { outline: 2px solid var(--s1); outline-radius: 3px; }
 .mdet > :not(summary) { margin-bottom: 18px; }
 @media print { .mdet > summary::after { content: ""; } }
 .mdet + h3.sec-title { margin-top: 40px; }
+
+/* homicidios por motivo: dos barras apiladas lado a lado */
+.mot-stack { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+.mot-stack.mot-1col { grid-template-columns: 1fr; gap: 32px; }
+.mot-stack .mot-cell { display: flex; flex-direction: column; }
+.mot-stack .mot-cell svg { margin-top: auto; }
+.mot-stack .mot-name { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+.mot-stack .legend { margin: 0 0 10px; gap: 6px 14px; font-size: 13px; }
+.seg-lbl { fill: #111; font-size: 10px; font-weight: 700; pointer-events: none; font-variant-numeric: tabular-nums; }
+.tabla-det { margin-top: 12px; font-size: 14px; }
+.tabla-det > summary { cursor: pointer; color: var(--ink-2); font-weight: 600; }
+.tabla-det .table-wrap { margin: 10px 0 0; }
+.mtable-num { min-width: 640px; font-size: 13px; }
+.mtable-num td, .mtable-num th { padding: 7px 10px; font-variant-numeric: tabular-nums; }
+.mtable-num td:first-child { font-weight: 600; }
+.muted { color: var(--muted); }
+@media print { .tabla-det { display: none; } }
+
+/* 06 conclusión */
+.concl-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 14px 0 8px; }
+.concl-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 18px; }
+.concl-card h4 { font-size: 16px; margin: 10px 0 6px; }
+.concl-card p { margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--ink-2); }
+.concl-n { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--s2); color: #fff; font-size: 13px; font-weight: 700; }
+.opinion-tag { display: inline-block; font-size: 12px !important; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted) !important;
+  border: 1px dashed var(--border); border-radius: 999px; padding: 2px 10px; margin: 0 0 12px !important; }
+#conclusion .cierre { border-left-color: var(--s2); font-size: 20px; }
+@media (max-width: 620px) { .concl-grid { grid-template-columns: 1fr; } }
+
+/* sobre mí: foto */
+.autor-head { display: flex; align-items: center; gap: 20px; margin: 0 0 18px; }
+.autor-head .sec-title { margin: 0 0 4px; }
+.autor-foto { width: 112px; height: 112px; border-radius: 50%; object-fit: cover; flex: none;
+  border: 3px solid var(--surface); box-shadow: 0 0 0 2px var(--s2), 0 8px 24px rgba(0,0,0,.12); }
+.autor-rol { margin: 0 !important; font-size: 15px; color: var(--muted) !important; }
+@media (max-width: 480px) { .autor-foto { width: 84px; height: 84px; } .autor-head { gap: 14px; } }

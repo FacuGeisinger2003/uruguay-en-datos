@@ -1,0 +1,18 @@
+[
+ {
+  "educacion":"No terminó el liceo",
+  "pct_ocupados":58.6,
+  "pct_desocupados":17.3,
+  "pct_inactivos":24.1,
+  "pct_inactivos_no_estudian":14.0,
+  "n_muestra":4213
+ },
+ {
+  "educacion":"Terminó el liceo",
+  "pct_ocupados":57.8,
+  "pct_desocupados":12.4,
+  "pct_inactivos":29.8,
+  "pct_inactivos_no_estudian":4.6,
+  "n_muestra":4102
+ }
+]

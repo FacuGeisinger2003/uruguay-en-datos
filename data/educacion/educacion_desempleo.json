@@ -1,0 +1,12 @@
+[
+ {
+  "educacion":"Terminó el liceo",
+  "pct_desempleo":17.6,
+  "n_muestra":2890
+ },
+ {
+  "educacion":"No terminó el liceo",
+  "pct_desempleo":22.8,
+  "n_muestra":3223
+ }
+]

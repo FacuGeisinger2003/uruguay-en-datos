@@ -1,0 +1,392 @@
+[
+ {
+  "anio":2013,
+  "motivo":"Conflictos entre criminales",
+  "n":77,
+  "orden":1
+ },
+ {
+  "anio":2013,
+  "motivo":"Altercados y conflictos",
+  "n":45,
+  "orden":2
+ },
+ {
+  "anio":2013,
+  "motivo":"Violencia doméstica",
+  "n":49,
+  "orden":3
+ },
+ {
+  "anio":2013,
+  "motivo":"Rapiña o hurto",
+  "n":57,
+  "orden":4
+ },
+ {
+  "anio":2013,
+  "motivo":"Otros \/ sin dato",
+  "n":33,
+  "orden":5
+ },
+ {
+  "anio":2014,
+  "motivo":"Conflictos entre criminales",
+  "n":97,
+  "orden":1
+ },
+ {
+  "anio":2014,
+  "motivo":"Altercados y conflictos",
+  "n":53,
+  "orden":2
+ },
+ {
+  "anio":2014,
+  "motivo":"Violencia doméstica",
+  "n":51,
+  "orden":3
+ },
+ {
+  "anio":2014,
+  "motivo":"Rapiña o hurto",
+  "n":47,
+  "orden":4
+ },
+ {
+  "anio":2014,
+  "motivo":"Otros \/ sin dato",
+  "n":21,
+  "orden":5
+ },
+ {
+  "anio":2015,
+  "motivo":"Conflictos entre criminales",
+  "n":110,
+  "orden":1
+ },
+ {
+  "anio":2015,
+  "motivo":"Altercados y conflictos",
+  "n":44,
+  "orden":2
+ },
+ {
+  "anio":2015,
+  "motivo":"Violencia doméstica",
+  "n":56,
+  "orden":3
+ },
+ {
+  "anio":2015,
+  "motivo":"Rapiña o hurto",
+  "n":55,
+  "orden":4
+ },
+ {
+  "anio":2015,
+  "motivo":"Otros \/ sin dato",
+  "n":28,
+  "orden":5
+ },
+ {
+  "anio":2016,
+  "motivo":"Conflictos entre criminales",
+  "n":104,
+  "orden":1
+ },
+ {
+  "anio":2016,
+  "motivo":"Altercados y conflictos",
+  "n":43,
+  "orden":2
+ },
+ {
+  "anio":2016,
+  "motivo":"Violencia doméstica",
+  "n":47,
+  "orden":3
+ },
+ {
+  "anio":2016,
+  "motivo":"Rapiña o hurto",
+  "n":40,
+  "orden":4
+ },
+ {
+  "anio":2016,
+  "motivo":"Otros \/ sin dato",
+  "n":34,
+  "orden":5
+ },
+ {
+  "anio":2017,
+  "motivo":"Conflictos entre criminales",
+  "n":128,
+  "orden":1
+ },
+ {
+  "anio":2017,
+  "motivo":"Altercados y conflictos",
+  "n":49,
+  "orden":2
+ },
+ {
+  "anio":2017,
+  "motivo":"Violencia doméstica",
+  "n":37,
+  "orden":3
+ },
+ {
+  "anio":2017,
+  "motivo":"Rapiña o hurto",
+  "n":38,
+  "orden":4
+ },
+ {
+  "anio":2017,
+  "motivo":"Otros \/ sin dato",
+  "n":33,
+  "orden":5
+ },
+ {
+  "anio":2018,
+  "motivo":"Conflictos entre criminales",
+  "n":193,
+  "orden":1
+ },
+ {
+  "anio":2018,
+  "motivo":"Altercados y conflictos",
+  "n":59,
+  "orden":2
+ },
+ {
+  "anio":2018,
+  "motivo":"Violencia doméstica",
+  "n":48,
+  "orden":3
+ },
+ {
+  "anio":2018,
+  "motivo":"Rapiña o hurto",
+  "n":50,
+  "orden":4
+ },
+ {
+  "anio":2018,
+  "motivo":"Otros \/ sin dato",
+  "n":70,
+  "orden":5
+ },
+ {
+  "anio":2019,
+  "motivo":"Conflictos entre criminales",
+  "n":173,
+  "orden":1
+ },
+ {
+  "anio":2019,
+  "motivo":"Altercados y conflictos",
+  "n":62,
+  "orden":2
+ },
+ {
+  "anio":2019,
+  "motivo":"Violencia doméstica",
+  "n":48,
+  "orden":3
+ },
+ {
+  "anio":2019,
+  "motivo":"Rapiña o hurto",
+  "n":46,
+  "orden":4
+ },
+ {
+  "anio":2019,
+  "motivo":"Otros \/ sin dato",
+  "n":65,
+  "orden":5
+ },
+ {
+  "anio":2020,
+  "motivo":"Conflictos entre criminales",
+  "n":146,
+  "orden":1
+ },
+ {
+  "anio":2020,
+  "motivo":"Altercados y conflictos",
+  "n":70,
+  "orden":2
+ },
+ {
+  "anio":2020,
+  "motivo":"Violencia doméstica",
+  "n":23,
+  "orden":3
+ },
+ {
+  "anio":2020,
+  "motivo":"Rapiña o hurto",
+  "n":28,
+  "orden":4
+ },
+ {
+  "anio":2020,
+  "motivo":"Otros \/ sin dato",
+  "n":74,
+  "orden":5
+ },
+ {
+  "anio":2021,
+  "motivo":"Conflictos entre criminales",
+  "n":131,
+  "orden":1
+ },
+ {
+  "anio":2021,
+  "motivo":"Altercados y conflictos",
+  "n":50,
+  "orden":2
+ },
+ {
+  "anio":2021,
+  "motivo":"Violencia doméstica",
+  "n":40,
+  "orden":3
+ },
+ {
+  "anio":2021,
+  "motivo":"Rapiña o hurto",
+  "n":27,
+  "orden":4
+ },
+ {
+  "anio":2021,
+  "motivo":"Otros \/ sin dato",
+  "n":59,
+  "orden":5
+ },
+ {
+  "anio":2022,
+  "motivo":"Conflictos entre criminales",
+  "n":183,
+  "orden":1
+ },
+ {
+  "anio":2022,
+  "motivo":"Altercados y conflictos",
+  "n":55,
+  "orden":2
+ },
+ {
+  "anio":2022,
+  "motivo":"Violencia doméstica",
+  "n":56,
+  "orden":3
+ },
+ {
+  "anio":2022,
+  "motivo":"Rapiña o hurto",
+  "n":15,
+  "orden":4
+ },
+ {
+  "anio":2022,
+  "motivo":"Otros \/ sin dato",
+  "n":74,
+  "orden":5
+ },
+ {
+  "anio":2023,
+  "motivo":"Conflictos entre criminales",
+  "n":196,
+  "orden":1
+ },
+ {
+  "anio":2023,
+  "motivo":"Altercados y conflictos",
+  "n":73,
+  "orden":2
+ },
+ {
+  "anio":2023,
+  "motivo":"Violencia doméstica",
+  "n":32,
+  "orden":3
+ },
+ {
+  "anio":2023,
+  "motivo":"Rapiña o hurto",
+  "n":26,
+  "orden":4
+ },
+ {
+  "anio":2023,
+  "motivo":"Otros \/ sin dato",
+  "n":54,
+  "orden":5
+ },
+ {
+  "anio":2024,
+  "motivo":"Conflictos entre criminales",
+  "n":213,
+  "orden":1
+ },
+ {
+  "anio":2024,
+  "motivo":"Altercados y conflictos",
+  "n":60,
+  "orden":2
+ },
+ {
+  "anio":2024,
+  "motivo":"Violencia doméstica",
+  "n":42,
+  "orden":3
+ },
+ {
+  "anio":2024,
+  "motivo":"Rapiña o hurto",
+  "n":26,
+  "orden":4
+ },
+ {
+  "anio":2024,
+  "motivo":"Otros \/ sin dato",
+  "n":42,
+  "orden":5
+ },
+ {
+  "anio":2025,
+  "motivo":"Conflictos entre criminales",
+  "n":215,
+  "orden":1
+ },
+ {
+  "anio":2025,
+  "motivo":"Altercados y conflictos",
+  "n":56,
+  "orden":2
+ },
+ {
+  "anio":2025,
+  "motivo":"Violencia doméstica",
+  "n":39,
+  "orden":3
+ },
+ {
+  "anio":2025,
+  "motivo":"Rapiña o hurto",
+  "n":15,
+  "orden":4
+ },
+ {
+  "anio":2025,
+  "motivo":"Otros \/ sin dato",
+  "n":50,
+  "orden":5
+ }
+]

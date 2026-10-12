@@ -1,6 +1,6 @@
-// Capítulo 05 — Lo que sí funciona (datos: data/fortalezas_paises.json, notebook 06_fortalezas)
+// Capítulo 05 — Lo que sí funciona (datos: data/fortalezas/fortalezas_paises.json, notebook 06_fortalezas)
 (async function () {
-  const data = await d3.json("data/fortalezas_paises.json");
+  const data = await d3.json("data/fortalezas/fortalezas_paises.json");
   const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
   const f1 = (v) => v.toLocaleString("es-UY", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
   const PAISES = ["URY", "ARG", "BOL", "BRA", "CHL", "COL", "ECU", "PRY", "PER", "VEN", "CRI", "MEX"];

@@ -1,10 +1,10 @@
 // Informe en PDF: gráficos estáticos pensados para A4 (datos: data/*.json, los mismos que usa la web)
 (async function () {
   const J = (f) => d3.json(`data/${f}.json`);
-  const [F, tramo, edad, dpto, egreso, nini, desemp, nac, hAnio, hMot, ppl, comp, fort] = await Promise.all([
-    J("fuentes"), J("pobreza_por_tramo"), J("pobreza_por_edad"), J("pobreza_infantil_dpto"), J("educacion_egreso_generacion"),
-    J("educacion_nini_dpto"), J("educacion_desempleo"), J("nacimientos_por_anio"), J("homicidios_por_anio"),
-    J("homicidios_por_motivo"), J("carceles_poblacion"), J("comparacion_paises"), J("fortalezas_paises"),
+  const [F, tramo, edad, dpto, egreso, nini, desemp, nac, hAnio, hMot, ppl, comp, fort, gasto] = await Promise.all([
+    J("fuentes"), J("pobreza/pobreza_por_tramo"), J("pobreza/pobreza_por_edad"), J("pobreza/pobreza_infantil_dpto"), J("educacion/educacion_egreso_generacion"),
+    J("educacion/educacion_nini_dpto"), J("educacion/educacion_desempleo"), J("demografia/nacimientos_por_anio"), J("seguridad/homicidios_por_anio"),
+    J("seguridad/homicidios_por_motivo"), J("seguridad/carceles_poblacion"), J("region/comparacion_paises"), J("fortalezas/fortalezas_paises"), J("seguridad/carceles_gasto"),
   ]);
   window.FUENTES = F;
 
@@ -168,7 +168,7 @@
 
   // ---------- actividad de los jóvenes (si existe el dato) ----------
   try {
-    const act = await d3.json("data/educacion_actividad.json");
+    const act = await d3.json("data/educacion/educacion_actividad.json");
     if (act && act.length) {
       document.getElementById("fig-actividad").hidden = false;
       const K = [["pct_ocupados", "Trabajan", C.blue], ["pct_desocupados", "Buscan y no consiguen", C.bad], ["pct_inactivos", "Ni trabajan ni buscan", C.gray]];
@@ -207,29 +207,24 @@
     ].map(([v, l]) => `<div><b>${v}</b><span>${l}</span></div>`).join("");
   })();
 
-  // ---------- G8: homicidios por motivo ----------
+  // ---------- G8: homicidios, conflictos entre criminales y el resto ----------
   (() => {
-    const MOT = ["Conflictos entre criminales", "Altercados y conflictos", "Violencia doméstica", "Rapiña o hurto", "Otros / sin dato"];
-    const COL = { "Conflictos entre criminales": C.acc, "Altercados y conflictos": C.blue, "Violencia doméstica": "#7a5bbf", "Rapiña o hurto": "#2a9d8f", "Otros / sin dato": C.gray };
-    legend("lg-mot", MOT.map((k) => [COL[k], k, 1]));
-    const W = FULL, H = 230, m = { t: 12, r: 150, b: 24, l: 34 };
-    const svg = svgIn("g-mot", W, H, "Homicidios por motivo");
-    const yrs = d3.extent(hMot, (d) => d.anio);
-    const x = d3.scaleLinear().domain(yrs).range([m.l, W - m.r]);
-    const y = d3.scaleLinear().domain([0, d3.max(hMot, (d) => d.n)]).nice().range([H - m.b, m.t]);
+    const FOCO = "Conflictos entre criminales";
+    legend("lg-mot", [[C.acc, FOCO], [C.gray, "Otros motivos"]]);
+    const A = [...new Set(hMot.map((d) => d.anio))].sort((a, b) => a - b);
+    const rows = A.map((a) => { const t = d3.sum(hMot.filter((d) => d.anio === a), (d) => d.n); const c = hMot.find((d) => d.anio === a && d.motivo === FOCO).n; return { a, t, c }; });
+    const W = FULL, H = 220, m = { t: 16, r: 2, b: 22, l: 34 };
+    const svg = svgIn("g-mot", W, H, "Homicidios por año: conflictos entre criminales y el resto");
+    const x = d3.scaleBand().domain(A).range([m.l, W - m.r]).paddingInner(0.22);
+    const y = d3.scaleLinear().domain([0, d3.max(rows, (d) => d.t)]).nice().range([H - m.b, m.t]);
     yAxis(svg, y, W, m, 4, (d) => d);
-    xLabels(svg, x, H, m, d3.range(yrs[0], yrs[1] + 1, 2), (d) => d);
-    const ends = [];
-    MOT.forEach((k) => {
-      const s = hMot.filter((d) => d.motivo === k).sort((a, b) => a.anio - b.anio);
-      svg.append("path").datum(s).attr("fill", "none").attr("stroke", COL[k]).attr("stroke-width", k === MOT[0] ? 2.4 : 1.4)
-        .attr("d", d3.line().x((d) => x(d.anio)).y((d) => y(d.n)));
-      ends.push({ k, v: s[s.length - 1].n, y: y(s[s.length - 1].n) });
+    rows.forEach((d) => {
+      svg.append("rect").attr("x", x(d.a)).attr("y", y(d.c)).attr("width", x.bandwidth()).attr("height", y(0) - y(d.c)).attr("fill", C.acc);
+      svg.append("rect").attr("x", x(d.a)).attr("y", y(d.t)).attr("width", x.bandwidth()).attr("height", y(d.c) - y(d.t) - 1.5).attr("fill", C.gray);
+      T(svg.append("text").attr("x", x(d.a) + x.bandwidth() / 2).attr("y", y(d.c / 2)).attr("dy", "0.33em").attr("text-anchor", "middle").attr("fill", "#fff").style("font-weight", 700).text(Math.round((d.c / d.t) * 100) + "%"), 8.5);
+      T(svg.append("text").attr("x", x(d.a) + x.bandwidth() / 2).attr("y", y(d.t) - 4).attr("text-anchor", "middle").attr("fill", C.ink).style("font-weight", 600).text(d.t), 8.5);
+      T(svg.append("text").attr("x", x(d.a) + x.bandwidth() / 2).attr("y", H - m.b + 14).attr("text-anchor", "middle").attr("fill", C.muted).text(d.a), 9);
     });
-    ends.sort((a, b) => a.y - b.y);
-    for (let i = 1; i < ends.length; i++) if (ends[i].y - ends[i - 1].y < 12) ends[i].y = ends[i - 1].y + 12;
-    ends.forEach((e) => T(svg.append("text").attr("x", x(yrs[1]) + 6).attr("y", e.y).attr("dy", "0.33em").attr("fill", COL[e.k] === C.gray ? C.muted : COL[e.k])
-      .style("font-weight", e.k === MOT[0] ? 700 : 500).text(`${e.v} · ${e.k}`), 9));
   })();
 
   // ---------- G9: personas presas ----------
@@ -246,6 +241,17 @@
       if (i === 0 || i === ppl.length - 1) T(svg.append("text").attr("x", x(d.anio) + x.bandwidth() / 2).attr("y", y(d.total) - 4).attr("text-anchor", "middle").attr("fill", C.ink).style("font-weight", 600).text(int(d.total)), 9);
       if (i % 3 === 0 || i === ppl.length - 1) T(svg.append("text").attr("x", x(d.anio) + x.bandwidth() / 2).attr("y", H - m.b + 14).attr("text-anchor", "middle").attr("fill", C.muted).text(d.anio), 9);
     });
+  })();
+
+  // ---------- costo de las cárceles ----------
+  (() => {
+    const g = gasto[gasto.length - 1], g0 = gasto[0];
+    document.getElementById("costo-stats").innerHTML = [
+      ["$ " + int(g.gasto_mensual_por_persona), `por persona presa por mes (${g.anio}); ${g0.anio}: $ ${int(g0.gasto_mensual_por_persona)}`],
+      [n1(g.salarios_minimos), `salarios mínimos por persona presa (${g.anio})`],
+      ["$ " + int(g.gasto_total / 1e6) + " mill.", `gasto ejecutado del programa de cárceles (${g.anio})`],
+      [int(g.ppl_promedio), `personas presas en promedio (${g.anio})`],
+    ].map(([v, l]) => `<div><b>${v}</b><span>${l}</span></div>`).join("");
   })();
 
   // ---------- capítulo 04: semáforo ----------
@@ -333,6 +339,32 @@
         svg.append("circle").attr("cx", x(s[0].anio)).attr("cy", y(s[0].valor)).attr("r", 3.5).attr("fill", c);
         T(svg.append("text").attr("x", x(s[0].anio) + 6).attr("y", y(s[0].valor) - 9).attr("fill", c).style("font-weight", 700).text(Math.round(s[0].valor) + "%"), 10);
       }
+    });
+  })();
+
+  // ---------- G13: puesto de Uruguay en todos los indicadores ----------
+  (() => {
+    const filas = IND.map((ind) => { const rk = ranking(ind); return { l: ind.label.replace(" (US$ PPA)", "").replace(" cada 100.000 hab.", "").replace(" (25+)", "").replace(" (15 a 24)", ""), pos: rk.findIndex((r) => r.iso3 === "URY") + 1, n: rk.length }; });
+    [["CC.SC", "Control de la corrupción"], ["RL.SC", "Estado de derecho"], ["VA.SC", "Libertades"], ["PV.SC", "Estabilidad política"], ["EG.ELC.RNWX.ZS", "Electricidad renovable no hidráulica"], ["IT.NET.BBND.P2", "Banda ancha fija"]].forEach(([id, l]) => {
+      const rk = PAISES.map((iso) => ult(fort, id, iso)).filter((r) => r && r.valor >= 0).sort((a, b) => b.valor - a.valor);
+      filas.push({ l, pos: rk.findIndex((r) => r.iso3 === "URY") + 1, n: rk.length });
+    });
+    filas.sort((a, b) => (a.pos - 1) / (a.n - 1) - (b.pos - 1) / (b.n - 1) || a.l.localeCompare(b.l, "es"));
+    const est = (p, n) => (p <= 3 ? C.good : p > n - 3 ? C.bad : C.warn);
+    legend("lg-contraste", [[C.good, "Entre los 3 mejores"], [C.warn, "En el medio"], [C.bad, "Entre los 3 peores"]]);
+    const W = FULL, rowH = 19, L = 190, R = 64, top = 14, H = top + filas.length * rowH;
+    const svg = svgIn("g-contraste", W, H, "Puesto de Uruguay en cada indicador");
+    const xr = (i, n) => L + (i / (n - 1)) * (W - L - R);
+    T(svg.append("text").attr("x", L).attr("y", 7).attr("fill", C.muted).text("← mejor puesto"), 8.5);
+    T(svg.append("text").attr("x", W - R).attr("y", 7).attr("text-anchor", "end").attr("fill", C.muted).text("peor puesto →"), 8.5);
+    filas.forEach((f, i) => {
+      const y = top + i * rowH + rowH / 2, c = est(f.pos, f.n);
+      T(svg.append("text").attr("x", L - 12).attr("y", y).attr("dy", "0.33em").attr("text-anchor", "end").attr("fill", C.ink).style("font-weight", 600).text(f.l), 9.5);
+      svg.append("line").attr("x1", xr(0, f.n)).attr("x2", xr(f.n - 1, f.n)).attr("y1", y).attr("y2", y).attr("stroke", C.line).attr("stroke-width", 1.5);
+      for (let k = 0; k < f.n; k++) if (k !== f.pos - 1) svg.append("circle").attr("cx", xr(k, f.n)).attr("cy", y).attr("r", 2.6).attr("fill", C.gray);
+      svg.append("circle").attr("cx", xr(f.pos - 1, f.n)).attr("cy", y).attr("r", 7).attr("fill", c);
+      T(svg.append("text").attr("x", xr(f.pos - 1, f.n)).attr("y", y).attr("dy", "0.34em").attr("text-anchor", "middle").attr("fill", "#fff").style("font-weight", 800).text(f.pos), 8);
+      T(svg.append("text").attr("x", W - R + 12).attr("y", y).attr("dy", "0.33em").attr("fill", c).style("font-weight", 700).text(`${f.pos}.º de ${f.n}`), 9);
     });
   })();
 

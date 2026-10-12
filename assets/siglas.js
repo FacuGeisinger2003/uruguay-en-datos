@@ -18,6 +18,7 @@
     "UNODC": ["Oficina de las Naciones Unidas contra la Droga y el Delito", "Reúne las cifras de homicidios de todos los países con una misma definición."],
     "WDI": ["World Development Indicators (Indicadores del Desarrollo Mundial)", "Base de datos del Banco Mundial que junta miles de indicadores de todos los países, medidos de la misma forma."],
     "WGI": ["Worldwide Governance Indicators (Indicadores Mundiales de Gobernanza)", "Medición del Banco Mundial sobre la calidad de las instituciones de cada país. Combina más de 30 encuestas y evaluaciones de organismos, ONG y empresas."],
+    "ASSE": ["Administración de los Servicios de Salud del Estado", "El prestador público de salud. Atiende, entre otros, a buena parte de las personas presas."],
     "ONG": ["Organización no gubernamental", "Organización sin fines de lucro que no depende del Estado."],
     "W_ANO": ["Ponderador anual de la ECH", "Cada persona encuestada representa a muchas otras; este número dice a cuántas, para que los resultados valgan para todo el país."],
     "JSON": ["JavaScript Object Notation", "Formato de archivo de texto para guardar datos. La página lee estos archivos para dibujar los gráficos."],

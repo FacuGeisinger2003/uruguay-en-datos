@@ -48,5 +48,15 @@
     "institucion": "MIEM",
     "nombre": "Generación eléctrica 2025 por fuente (datos preliminares, enero de 2026)",
     "url": "https://www.gub.uy/ministerio-industria-energia-mineria/comunicacion/noticias/uruguay-mantiene-su-alta-renovabilidad-generacion-electrica"
+  },
+  "mi_presupuesto": {
+    "institucion": "Ministerio del Interior",
+    "nombre": "Ejecución presupuestal por programa, 2023 y 2024 (programa 461, Gestión de la privación de libertad)",
+    "url": "https://www.gub.uy/ministerio-interior/institucional/informacion-gestion/presupuesto/ejecucion-presupuestal-del-ministerio-del-interior"
+  },
+  "smn": {
+    "institucion": "IMPO",
+    "nombre": "Decreto 454/2023, Salario Mínimo Nacional 2024",
+    "url": "https://www.impo.com.uy/bases/decretos/454-2023"
   }
 }

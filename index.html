@@ -29,6 +29,7 @@
       <a href="#seguridad" data-ch="seguridad"><span>03</span> Seguridad</a>
       <a href="#region" data-ch="region"><span>04</span> Región</a>
       <a href="#fortalezas" data-ch="fortalezas"><span>05</span> Fortalezas</a>
+      <a href="#conclusion" data-ch="conclusion"><span>06</span> Conclusión</a>
       <a href="#metodologia" data-ch="metodologia" class="nav-method">Metodología</a>
       <a href="#autor" data-ch="autor" class="nav-method">Sobre mí</a>
     </nav>
@@ -106,6 +107,7 @@
   <section class="reveal">
     <h3 class="sec-title">La pobreza baja con cada año de vida</h3>
     <p>Edad por edad, la curva cae casi sin interrupciones: arranca cerca del 40% en el primer año de vida y baja a menos del 5% a los 80.</p>
+    <p><strong>Ojo con cómo se lee:</strong> el gráfico es una foto de un año, no sigue a las mismas personas a lo largo de su vida. No quiere decir que los niños salgan de la pobreza al crecer. Quiere decir que hoy la pobreza se concentra en los hogares con niños, mientras que los mayores están más protegidos.</p>
     <div class="card">
       <div class="card-head">
         <h4>% de personas en hogares pobres, por edad simple</h4>
@@ -211,15 +213,18 @@
   <p class="fuente" data-fuente="mi_homicidios"></p>
 
   <section class="reveal">
-    <h3 class="sec-title">El motivo que casi se triplicó</h3>
-    <p>En 2013 hubo 77 homicidios por conflictos entre criminales y en 2025 hubo 215. En el mismo período, los homicidios por rapiña o hurto bajaron.</p>
+    <h3 class="sec-title">Todo el aumento viene de los conflictos entre criminales</h3>
+    <p>Los homicidios pasaron de 261 en 2013 a 375 en 2025. En el mismo período, los homicidios por conflictos entre criminales casi se triplicaron (de 77 a 215), mientras que el resto bajó de 184 a 160. En 2013 eran 3 de cada 10 homicidios; en 2025, casi 6 de cada 10.</p>
     <div class="card">
       <div class="card-head">
-        <h4>Homicidios por motivo aparente, 2013–2025</h4>
-        <ul class="legend" id="legend-motivo"></ul>
+        <h4>Homicidios por año y motivo aparente, 2013–2025</h4>
       </div>
       <div id="chart-motivo" class="chart"></div>
-      <p class="note">Motivo aparente según la clasificación del Ministerio del Interior. "Otros / sin dato" junta "otros motivos" y los casos sin motivo identificado.</p>
+      <p class="note">La altura de cada barra es el total de homicidios del año y cada color es la parte que corresponde a cada motivo. Pasá el mouse (o tocá) una barra para ver cantidades y porcentajes. Motivo aparente según la clasificación del Ministerio del Interior; "Otros / sin dato" junta "otros motivos" y los casos sin motivo identificado.</p>
+      <details class="tabla-det">
+        <summary>Ver los datos en una tabla</summary>
+        <div class="table-wrap" id="tabla-motivo"></div>
+      </details>
       <p class="fuente" data-fuente="mi_homicidios" data-detalle="una fila por víctima, años completos 2013–2025"></p>
     </div>
   </section>
@@ -237,6 +242,14 @@
       <div id="chart-ppl" class="chart"></div>
       <p class="fuente" data-fuente="mi_carceles" data-detalle="dato de diciembre de cada año"></p>
     </div>
+  </section>
+
+  <section class="reveal" id="costo-carceles">
+    <h3 class="sec-title">Cada persona presa cuesta unos $ 31.000 por mes</h3>
+    <p>En 2024, el programa del Ministerio del Interior que gestiona las cárceles gastó <strong>$ 5.893 millones</strong> entre sueldos, funcionamiento (comida, limpieza, mantenimiento) e inversión. Repartido entre la población presa promedio del año, son unos <strong>$ 31.000 por persona por mes</strong>: 1,4 veces el salario mínimo nacional de ese año.</p>
+    <div class="stats" id="costo-stats"></div>
+    <p class="note">Es el gasto ejecutado del programa 461, <i>Gestión de la privación de libertad</i>, dividido entre la población presa promedio del año (promedio entre diciembre del año anterior y diciembre de ese año) y entre 12 meses. Puede haber costos de las cárceles registrados en otros organismos, como la atención de salud que da ASSE, así que es un piso y no el costo total. El Ministerio publica este desglose solo para 2023 y 2024.</p>
+    <p class="fuente" data-fuente="mi_presupuesto,mi_carceles,smn" data-detalle="pesos corrientes; salario mínimo 2024: $ 22.268"></p>
   </section>
 </article>
 
@@ -310,6 +323,44 @@
 
 
 
+<!-- ============ 06 CONCLUSIÓN ============ -->
+<article id="conclusion" class="chapter">
+  <header class="chapter-cover reveal">
+    <p class="chapter-num">06 · Conclusión</p>
+    <h2 class="chapter-title">Las instituciones funcionan. Los resultados para los chicos y los jóvenes, no.</h2>
+    <p class="lede">Entre los 12 países comparados, Uruguay es primero en control de la corrupción, estado de derecho, libertades y estabilidad política. Al mismo tiempo, es último en desempleo juvenil y en adultos con secundaria completa, y 1 de cada 3 niños de 0 a 5 años vive en un hogar pobre.</p>
+  </header>
+
+  <section class="reveal">
+    <h3 class="sec-title">Todos los indicadores en una sola imagen</h3>
+    <p>Cada fila es un indicador de los capítulos 04 y 05. Los puntos grises son los demás países, ordenados del mejor (izquierda) al peor (derecha), y el círculo de color marca el puesto de Uruguay.</p>
+    <div class="card">
+      <div class="card-head"><h4>Puesto de Uruguay entre los países de la región, último dato disponible</h4></div>
+      <ul class="legend legend-left" id="legend-contraste"></ul>
+      <div id="chart-contraste" class="chart"></div>
+      <p class="note">Verde: entre los 3 mejores. Amarillo: en el medio. Rojo: entre los 3 peores. Algunos indicadores tienen 11 países porque a uno le falta un dato reciente.</p>
+      <p class="fuente" data-fuente="bm_wdi,bm_wgi" data-detalle="mismos datos y reglas que los capítulos 04 y 05"></p>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <h3 class="sec-title">Lo que muestran los datos</h3>
+    <div class="concl-grid">
+      <div class="concl-card"><span class="concl-n">1</span><h4>No es un problema de Estado débil</h4><p>Uruguay tiene las instituciones mejor evaluadas de la región. Los malos resultados no se explican por corrupción ni por inestabilidad.</p></div>
+      <div class="concl-card"><span class="concl-n">2</span><h4>La pobreza está en los chicos</h4><p>El 32% de los niños de 0 a 5 años vive en hogares pobres, contra el 6% de los mayores de 65. Y cada año nacen menos niños: 39% menos que en 2015.</p></div>
+      <div class="concl-card"><span class="concl-n">3</span><h4>A los jóvenes les cuesta arrancar</h4><p>Casi la mitad no termina la educación media, y el desempleo juvenil es el más alto de los 12 países.</p></div>
+      <div class="concl-card"><span class="concl-n">4</span><h4>Ser el mejor de la región no alcanza</h4><p>Uruguay tiene el mayor ingreso por persona del grupo, pero es el 60% del promedio de la OCDE. Compararse con los vecinos deja la vara baja.</p></div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <h3 class="sec-title">Mi lectura</h3>
+    <p class="opinion-tag">Opinión del autor, no un resultado de los datos</p>
+    <p>La electricidad muestra que Uruguay puede dar un salto cuando se lo propone: con una política acordada por todos los partidos y sostenida por gobiernos de distinto signo, pasó del 13% al 51% de electricidad de viento, sol y biomasa en nueve años, y hoy lidera la región. Con la niñez, la educación y el empleo de los jóvenes no hubo un acuerdo así. Las instituciones que tenemos son la base para hacerlo.</p>
+    <p class="cierre">La pregunta no es si Uruguay está mejor que el resto. Es si está bien. Y para los chicos y los jóvenes, los datos dicen que no.</p>
+  </section>
+</article>
+
 <!-- ============ METODOLOGÍA ============ -->
 <section class="method" id="metodologia">
   <p class="chapter-num">Metodología</p>
@@ -335,7 +386,7 @@
       <tbody>
         <tr><td>Pobreza infantil</td><td>INE, ECH 2024 y 2025 (microdatos, ~55.000 personas por año)</td><td>% de personas en hogares bajo la línea de pobreza (<code>pobre17</code>), por edad y departamento, ponderado con <code>W_ANO</code></td><td>La ECH 2025 es de implantación: la comparación con 2024 es indicativa. Muestras chicas por departamento.</td><td><code>01_pobreza</code></td></tr>
         <tr><td>Educación</td><td>INE, ECH 2024</td><td>Egreso de educación media superior (bachillerato en liceo o UTU, o terciaria), jóvenes que no estudian ni trabajan, condición de actividad y desempleo según educación</td><td>Validado contra el INEEd (51,6% en 2023; acá 53,2% en 2024).</td><td><code>02_educacion</code></td></tr>
-        <tr><td>Homicidios y cárceles</td><td>Ministerio del Interior, datos abiertos</td><td>Homicidios por año y motivo aparente (una fila por víctima); personas presas en diciembre de cada año</td><td>El Ministerio reclasifica casos, así que puede haber diferencias de pocas unidades con los informes anuales.</td><td><code>03_seguridad</code></td></tr>
+        <tr><td>Homicidios y cárceles</td><td>Ministerio del Interior, datos abiertos y ejecución presupuestal por programa</td><td>Homicidios por año y motivo aparente (una fila por víctima); personas presas en diciembre de cada año; gasto del programa de cárceles por persona presa</td><td>El Ministerio reclasifica casos, así que puede haber diferencias de pocas unidades con los informes anuales. El gasto solo está publicado para 2023 y 2024, y no incluye costos de otros organismos.</td><td><code>03_seguridad</code></td></tr>
         <tr><td>Natalidad (dentro de Pobreza infantil)</td><td>MSP, informes de estadísticas vitales</td><td>Nacimientos por año, 2015–2024</td><td>No hay un dataset abierto actualizado: las cifras se transcribieron del informe oficial, con la fuente en cada fila. 2024 es preliminar.</td><td><code>04_demografia</code></td></tr>
         <tr><td>Región</td><td>Banco Mundial (WDI), con datos del FMI, la OIT, la UNODC y la UNESCO</td><td>9 indicadores comparables para 12 países (10 de Sudamérica, Costa Rica y México; no entran Guyana ni Surinam), América Latina y la OCDE; semáforo según el puesto</td><td>El desempleo es la estimación modelada de la OIT. Para poder comparar países, la pobreza de este capítulo usa la línea internacional de US$ 8,30 por día; la del capítulo 01 usa la línea oficial del INE, por eso los porcentajes no coinciden.</td><td><code>05_comparacion_regional</code></td></tr>
         <tr><td>Lo que sí funciona</td><td>Banco Mundial: WGI (instituciones) y WDI (energía e internet)</td><td>Último dato de 6 indicadores en los que Uruguay es primero entre los 12 países; evolución de la electricidad renovable sin hidro</td><td>Los puntajes del WGI combinan encuestas y evaluaciones de expertos: miden percepciones, no hechos contados uno por uno. El dato de energía llega hasta 2021. Venezuela queda fuera del ranking de electricidad porque la fuente publica un valor negativo, que no es posible.</td><td><code>06_fortalezas</code></td></tr>
@@ -367,7 +418,13 @@
 
 <section class="autor reveal" id="autor">
   <p class="chapter-num">Sobre mí</p>
-  <h2 class="sec-title">Facundo Geisinger</h2>
+  <div class="autor-head">
+    <img class="autor-foto" src="assets/facundo.jpg" width="112" height="112" alt="Foto de Facundo Geisinger">
+    <div>
+      <h2 class="sec-title">Facundo Geisinger</h2>
+      <p class="autor-rol">Estudiante de Ciencia de Datos · Universidad de Montevideo</p>
+    </div>
+  </div>
   <p>Desde chico me interesó la política y sus números. Me acuerdo de mirar las elecciones por televisión, atento a cada porcentaje que se actualizaba: cuánta gente votó, quién subía, quién bajaba. Hoy estudio Ciencia de Datos en la Universidad de Montevideo, y este proyecto es la forma de juntar las dos cosas que me gustan: los datos y los temas que se discuten en el país.</p>
   <p class="contacto">¿Una corrección o una sugerencia? Escribime:
     <a href="mailto:facugeisinger@gmail.com">✉️ facugeisinger@gmail.com</a>
@@ -394,6 +451,7 @@
 <script src="assets/temas.js"></script>
 <script src="assets/comparador.js"></script>
 <script src="assets/fortalezas.js"></script>
+<script src="assets/cierre.js"></script>
 <script src="assets/siglas.js"></script>
 </body>
 </html>

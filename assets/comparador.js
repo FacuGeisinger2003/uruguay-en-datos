@@ -1,6 +1,6 @@
-// Capítulo 04 — Uruguay frente a la región (datos: data/comparacion_paises.json, notebook 07)
+// Capítulo 04 — Uruguay frente a la región (datos: data/region/comparacion_paises.json, notebook 05_comparacion_regional)
 (async function () {
-  const rows = await d3.json("data/comparacion_paises.json");
+  const rows = await d3.json("data/region/comparacion_paises.json");
 
   const IND = [
     { id: "NY.GDP.PCAP.PP.KD", que: "Cuánto produce el país por persona", explica: "Es el valor de todo lo que produce el país en un año, dividido entre sus habitantes. Está en dólares \"PPA\": se ajusta por lo que cuestan las cosas en cada país, para que un dólar compre lo mismo en todos. Más alto es mejor.", grp: "Economía", label: "PIB per cápita", unit: "US$ PPA", better: "high", fmt: (v) => "US$ " + Math.round(v).toLocaleString("es-UY"), src: "Banco Mundial / ICP · PIB per cápita en paridad de poder adquisitivo, US$ internacionales constantes de 2021" },

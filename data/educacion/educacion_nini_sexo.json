@@ -1,0 +1,12 @@
+[
+ {
+  "sexo":"Hombres",
+  "pct_nini":13.2,
+  "n_muestra":3637
+ },
+ {
+  "sexo":"Mujeres",
+  "pct_nini":17.0,
+  "n_muestra":3713
+ }
+]

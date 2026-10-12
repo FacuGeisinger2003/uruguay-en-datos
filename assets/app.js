@@ -1,9 +1,9 @@
 // De 100 niños uruguayos — visualización de pobreza infantil (ECH INE 2024–2025)
 (async function () {
   const [tramos, edades, dptos] = await Promise.all([
-    d3.json("data/pobreza_por_tramo.json"),
-    d3.json("data/pobreza_por_edad.json"),
-    d3.json("data/pobreza_infantil_dpto.json"),
+    d3.json("data/pobreza/pobreza_por_tramo.json"),
+    d3.json("data/pobreza/pobreza_por_edad.json"),
+    d3.json("data/pobreza/pobreza_infantil_dpto.json"),
   ]);
 
   const ANIOS = [2024, 2025];

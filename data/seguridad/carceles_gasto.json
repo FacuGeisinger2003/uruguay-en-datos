@@ -1,0 +1,24 @@
+[
+ {
+  "anio": 2023,
+  "remuneraciones": 4137401453,
+  "funcionamiento": 1122404820,
+  "inversion": 420183878,
+  "gasto_total": 5679990151,
+  "ppl_promedio": 14955.5,
+  "gasto_mensual_por_persona": 31649,
+  "salario_minimo": 21107,
+  "salarios_minimos": 1.5
+ },
+ {
+  "anio": 2024,
+  "remuneraciones": 4397191551,
+  "funcionamiento": 1176837318,
+  "inversion": 318651742,
+  "gasto_total": 5892680611,
+  "ppl_promedio": 15760.5,
+  "gasto_mensual_por_persona": 31157,
+  "salario_minimo": 22268,
+  "salarios_minimos": 1.4
+ }
+]

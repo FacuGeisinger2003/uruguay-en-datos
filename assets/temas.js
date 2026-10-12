@@ -1,10 +1,11 @@
-// Capítulos 02 (seguridad) y 03 (natalidad) — datos en data/*.json generados por los notebooks 04 y 06
+// Seguridad (homicidios y cárceles) y natalidad — datos en data/seguridad y data/demografia (notebooks 03 y 04)
 (async function () {
-  const [porAnio, porMotivo, ppl, nac] = await Promise.all([
-    d3.json("data/homicidios_por_anio.json"),
-    d3.json("data/homicidios_por_motivo.json"),
-    d3.json("data/carceles_poblacion.json"),
-    d3.json("data/nacimientos_por_anio.json"),
+  const [porAnio, porMotivo, ppl, nac, gasto] = await Promise.all([
+    d3.json("data/seguridad/homicidios_por_anio.json"),
+    d3.json("data/seguridad/homicidios_por_motivo.json"),
+    d3.json("data/seguridad/carceles_poblacion.json"),
+    d3.json("data/demografia/nacimientos_por_anio.json"),
+    d3.json("data/seguridad/carceles_gasto.json"),
   ]);
 
   const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
@@ -50,57 +51,94 @@
     [num(porAnio[0].n), `homicidios en ${porAnio[0].anio}, para comparar`],
   ].map(([v, l]) => `<div class="stat"><div class="v">${v}</div><div class="l">${l}</div></div>`).join("");
 
-  // ---------- homicidios por motivo: small multiples ----------
+  // ---------- costo de las cárceles ----------
+  const g = gasto[gasto.length - 1], g0 = gasto[0];
+  const dec1 = (v) => v.toLocaleString("es-UY", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  document.getElementById("costo-stats").innerHTML = [
+    ["$ " + num(g.gasto_mensual_por_persona), `por persona presa por mes (${g.anio})`, `${g0.anio}: $ ${num(g0.gasto_mensual_por_persona)}`],
+    [dec1(g.salarios_minimos).replace(",0", ""), `salarios mínimos por persona presa (${g.anio})`, `salario mínimo ${g.anio}: $ ${num(g.salario_minimo)}`],
+    ["$ " + num(Math.round(g.gasto_total / 1e6)) + " mill.", `gasto total del programa de cárceles (${g.anio})`, `${g0.anio}: $ ${num(Math.round(g0.gasto_total / 1e6))} millones`],
+  ].map(([v, l, d]) => `<div class="stat"><div class="v">${v}</div><div class="l">${l}</div><div class="d">${d}</div></div>`).join("");
+
+  // ---------- homicidios por motivo: barras apiladas (altura = total del año) ----------
+  // Izquierda: conflictos entre criminales vs. el resto. Derecha: las cinco categorías.
   const MOTIVOS = ["Conflictos entre criminales", "Altercados y conflictos", "Violencia doméstica", "Rapiña o hurto", "Otros / sin dato"];
   const FOCO = MOTIVOS[0];
-  const colorMotivo = (m) => (m === FOCO ? css("--s2") : css("--s1"));
-  document.getElementById("legend-motivo").innerHTML =
-    `<li>${sw(css("--s2"))}Conflictos entre criminales</li><li>${sw(css("--s1"))}Otros motivos</li>`;
+  const COLOR_MOT = { "Conflictos entre criminales": "--s2", "Altercados y conflictos": "--s1", "Violencia doméstica": "--c3",
+    "Rapiña o hurto": "--c4", "Otros / sin dato": "--c5", "Otros motivos": "--ref" };
+  const colMot = (m) => css(COLOR_MOT[m]);
+  const ANIOS_MOT = [...new Set(porMotivo.map((d) => d.anio))].sort((a, b) => a - b);
+  const porAnioMot = ANIOS_MOT.map((anio) => {
+    const fila = { anio, total: 0 };
+    MOTIVOS.forEach((m) => { const d = porMotivo.find((r) => r.anio === anio && r.motivo === m); fila[m] = d ? d.n : 0; fila.total += fila[m]; });
+    fila["Otros motivos"] = fila.total - fila[FOCO];
+    return fila;
+  });
+  const VISTAS = [
+    { id: "a", titulo: "Conflictos entre criminales y el resto", claves: [FOCO, "Otros motivos"], pctFoco: true },
+    { id: "b", titulo: "Por motivo", claves: MOTIVOS, pctFoco: false },
+  ];
+  const leg = (claves) => claves.map((k) => `<li>${sw(colMot(k))}${k}</li>`).join("");
+
+  function stackChart(cell, vista, W, yMax) {
+    const H = 300, m = { t: 22, r: 4, b: 28, l: 34 };
+    cell.append("div").attr("class", "mot-name").text(vista.titulo);
+    cell.append("ul").attr("class", "legend legend-left").html(leg(vista.claves));
+    const svg = cell.append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img")
+      .attr("aria-label", `Homicidios por año, ${vista.titulo.toLowerCase()}: ${ANIOS_MOT[0]} ${porAnioMot[0].total}, ${ANIOS_MOT[ANIOS_MOT.length - 1]} ${porAnioMot[porAnioMot.length - 1].total}`);
+    const x = d3.scaleBand().domain(ANIOS_MOT).range([m.l, W - m.r]).paddingInner(W < 420 ? 0.18 : 0.26);
+    const y = d3.scaleLinear().domain([0, yMax]).nice().range([H - m.b, m.t]);
+    const every = x.bandwidth() < 22 ? 3 : 2;
+    axes(svg, x, y, W, H, m, 4, (d) => d,
+      d3.axisBottom(x).tickValues(ANIOS_MOT.filter((a, i) => i % every === 0 || i === ANIOS_MOT.length - 1))
+        .tickFormat((a) => (x.bandwidth() < 30 ? "’" + String(a).slice(2) : a)).tickSize(0).tickPadding(8));
+    const stack = d3.stack().keys(vista.claves)(porAnioMot);
+    const gap = 2;
+    stack.forEach((serie, si) => {
+      const top = si === stack.length - 1;
+      svg.append("g").selectAll("path").data(serie).join("path").attr("fill", colMot(serie.key))
+        .attr("d", (d) => {
+          const x0 = x(d.data.anio), y0 = y(d[0]) - (si > 0 ? gap / 2 : 0), y1 = y(d[1]) + (top ? 0 : gap / 2);
+          if (y0 - y1 <= 0) return null;
+          return top ? roundedBar(x0, y0, x.bandwidth(), y1, 3) : `M${x0},${y0}V${y1}H${x0 + x.bandwidth()}V${y0}Z`;
+        });
+    });
+    // % de conflictos entre criminales dentro del segmento, si entra
+    if (vista.pctFoco && x.bandwidth() >= 21) {
+      svg.append("g").selectAll("text").data(porAnioMot).join("text")
+        .attr("x", (d) => x(d.anio) + x.bandwidth() / 2).attr("y", (d) => y(d[FOCO] / 2)).attr("dy", "0.35em")
+        .attr("text-anchor", "middle").attr("class", "seg-lbl").text((d) => Math.round((d[FOCO] / d.total) * 100) + "%");
+    }
+    // total arriba: primer año, pico y último año
+    const pico = porAnioMot.reduce((a, b) => (b.total > a.total ? b : a));
+    const marcar = [porAnioMot[0], pico, porAnioMot[porAnioMot.length - 1]];
+    svg.append("g").selectAll("text").data(marcar).join("text").attr("class", "val").attr("text-anchor", "middle")
+      .attr("x", (d) => x(d.anio) + x.bandwidth() / 2).attr("y", (d) => y(d.total) - 6).style("font-weight", 600).text((d) => d.total);
+    // hover por año
+    const foco = svg.append("rect").attr("fill", "none").attr("stroke", css("--ink")).attr("stroke-width", 1.5).attr("rx", 4).attr("opacity", 0);
+    svg.append("g").attr("class", "hit").selectAll("rect").data(porAnioMot).join("rect").attr("fill", "transparent")
+      .attr("x", (d) => x(d.anio) - (x.step() - x.bandwidth()) / 2).attr("width", x.step()).attr("y", m.t).attr("height", H - m.t - m.b)
+      .on("pointermove", (ev, d) => {
+        foco.attr("x", x(d.anio) - 2).attr("width", x.bandwidth() + 4).attr("y", y(d.total) - 2).attr("height", y(0) - y(d.total) + 2).attr("opacity", 1);
+        const filas = vista.claves.slice().reverse().map((k) =>
+          `<div class="row">${sw(colMot(k))}${k}<strong>${d[k]} · ${pct(d[k] / d.total)}</strong></div>`).join("");
+        showTip(`<b>${d.anio} · ${d.total} homicidios</b>${filas}`, ev);
+      })
+      .on("pointerleave", () => { foco.attr("opacity", 0); hideTip(); });
+  }
 
   function renderMotivo() {
     const host = document.getElementById("chart-motivo");
     host.innerHTML = "";
-    const W = host.clientWidth;
-    const gap = 20;
-    const ancho = W >= 620;                 // layout: destacado a la izquierda + 2x2 a la derecha
-    const grid = d3.select(host).append("div").attr("class", ancho ? "mot-grid" : "mot-grid mot-1col");
-    const years = d3.extent(porMotivo, (d) => d.anio);
-    const yMax = d3.max(porMotivo, (d) => d.n);
-    const smallW = ancho ? (W - gap) / 2 / 2 - gap / 2 : (W - gap) / 2;
-    const bigW = ancho ? (W - gap) / 2 : W;
-
-    MOTIVOS.forEach((mot, idx) => {
-      const rows = porMotivo.filter((d) => d.motivo === mot).sort((a, b) => a.anio - b.anio);
-      const foco = idx === 0;
-      const cell = grid.append("div").attr("class", foco ? "mot-cell mot-foco" : "mot-cell");
-      const first = rows[0], last = rows[rows.length - 1];
-      cell.append("div").attr("class", "mot-name").text(mot);
-      cell.append("div").attr("class", "mot-sub").text(`${first.anio}: ${first.n} → ${last.anio}: ${last.n}`);
-      const cw = foco ? bigW : smallW, ch = foco ? (ancho ? 300 : 170) : (ancho ? 120 : 110);
-      const m = { t: 10, r: 16, b: 22, l: 30 };
-      const svg = cell.append("svg").attr("viewBox", `0 0 ${cw} ${ch}`)
-        .attr("role", "img").attr("aria-label", `Homicidios por ${mot}: ${first.n} en ${first.anio}, ${last.n} en ${last.anio}`);
-      const x = d3.scaleLinear().domain(years).range([m.l, cw - m.r]);
-      const y = d3.scaleLinear().domain([0, yMax]).nice().range([ch - m.b, m.t]);
-      axes(svg, x, y, cw, ch, m, 3, (d) => d,
-        d3.axisBottom(x).tickValues([years[0], 2018, years[1]]).tickFormat(d3.format("d")).tickSize(0).tickPadding(8));
-      const c = colorMotivo(mot);
-      svg.append("path").datum(rows).attr("fill", c).attr("opacity", 0.12)
-        .attr("d", d3.area().x((d) => x(d.anio)).y0(y(0)).y1((d) => y(d.n)).curve(d3.curveMonotoneX));
-      svg.append("path").datum(rows).attr("fill", "none").attr("stroke", c).attr("stroke-width", 2)
-        .attr("d", d3.line().x((d) => x(d.anio)).y((d) => y(d.n)).curve(d3.curveMonotoneX));
-      const dot = svg.append("circle").attr("r", 4.5).attr("fill", c).attr("stroke", css("--surface")).attr("stroke-width", 2).attr("opacity", 0);
-      svg.append("rect").attr("fill", "transparent").attr("x", m.l).attr("y", m.t).attr("width", cw - m.l - m.r).attr("height", ch - m.t - m.b)
-        .on("pointermove", (ev) => {
-          const a = Math.round(x.invert(d3.pointer(ev)[0]));
-          const d = rows.find((r) => r.anio === a);
-          if (!d) return;
-          const tot = porAnio.find((r) => r.anio === a).n;
-          dot.attr("cx", x(a)).attr("cy", y(d.n)).attr("opacity", 1);
-          showTip(`<b>${mot} · ${a}</b><div class="row">${sw(c)}Homicidios<strong>${d.n}</strong></div><div class="row">Del total del año<strong>${pct(d.n / tot)}</strong></div>`, ev);
-        })
-        .on("pointerleave", () => { dot.attr("opacity", 0); hideTip(); });
-    });
+    const W = host.clientWidth, ancho = W >= 680, gap = 28;
+    const grid = d3.select(host).append("div").attr("class", ancho ? "mot-stack" : "mot-stack mot-1col");
+    const cw = ancho ? (W - gap) / 2 : W;
+    const yMax = d3.max(porAnioMot, (d) => d.total);
+    VISTAS.forEach((v) => stackChart(grid.append("div").attr("class", "mot-cell"), v, cw, yMax));
+    // tabla con los datos (accesible y para quien prefiera los números)
+    const tabla = document.getElementById("tabla-motivo");
+    if (tabla) tabla.innerHTML = `<table class="mtable mtable-num"><thead><tr><th>Año</th><th>Total</th>${MOTIVOS.map((k) => `<th>${k}</th>`).join("")}</tr></thead><tbody>` +
+      porAnioMot.map((d) => `<tr><td>${d.anio}</td><td>${d.total}</td>${MOTIVOS.map((k) => `<td>${d[k]} <span class="muted">(${pct(d[k] / d.total)})</span></td>`).join("")}</tr>`).join("") + "</tbody></table>";
   }
 
   // ---------- cárceles: barras por año ----------
