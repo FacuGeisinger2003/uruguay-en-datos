@@ -18,7 +18,7 @@
   ];
   const IND_FORT = [
     ["CC.SC", "Control de la corrupción"], ["RL.SC", "Estado de derecho"], ["VA.SC", "Libertades"],
-    ["PV.SC", "Estabilidad política"], ["EG.ELC.RNWX.ZS", "Electricidad renovable no hidráulica"], ["IT.NET.BBND.P2", "Banda ancha fija"],
+    ["PV.SC", "Estabilidad política"], ["EG.ELC.RNWX.ZS", "Electricidad renovable no hidráulica"],
   ];
   const ultimo = (rows, ind, iso) => rows.filter((r) => r.indicador === ind && r.iso3 === iso).sort((a, b) => b.anio - a.anio)[0];
 

@@ -206,8 +206,6 @@
       ["RL.SC", "Estado de derecho", (v) => int(v) + "/100"],
       ["VA.SC", "Libertades y rendición de cuentas", (v) => int(v) + "/100"],
       ["PV.SC", "Estabilidad política", (v) => int(v) + "/100"],
-      ["EG.ELC.RNWX.ZS", "Electricidad de viento, sol y biomasa", (v) => int(v) + "%"],
-      ["IT.NET.BBND.P2", "Banda ancha fija (conexiones cada 100 hab.)", (v) => int(v)],
     ];
     const head = `<thead><tr><th>Indicador</th><th class="n">Uruguay</th><th class="n">Año</th><th>Segundo puesto</th><th class="n">América Latina</th><th class="n">OCDE</th></tr></thead>`;
     const body = F5.map(([id, label, f]) => {
@@ -223,7 +221,7 @@
   // ---------- G13: puesto de Uruguay en todos los indicadores ----------
   (() => {
     const filas = IND.map((ind) => { const rk = ranking(ind); return { l: ind.label.replace(" (US$ PPA)", "").replace(" cada 100.000 hab.", "").replace(" (25+)", "").replace(" (15 a 24)", ""), pos: rk.findIndex((r) => r.iso3 === "URY") + 1, n: rk.length }; });
-    [["CC.SC", "Control de la corrupción"], ["RL.SC", "Estado de derecho"], ["VA.SC", "Libertades"], ["PV.SC", "Estabilidad política"], ["EG.ELC.RNWX.ZS", "Electricidad renovable no hidráulica"], ["IT.NET.BBND.P2", "Banda ancha fija"]].forEach(([id, l]) => {
+    [["CC.SC", "Control de la corrupción"], ["RL.SC", "Estado de derecho"], ["VA.SC", "Libertades"], ["PV.SC", "Estabilidad política"], ["EG.ELC.RNWX.ZS", "Electricidad renovable no hidráulica"]].forEach(([id, l]) => {
       const rk = PAISES.map((iso) => ult(fort, id, iso)).filter((r) => r && r.valor >= 0).sort((a, b) => b.valor - a.valor);
       filas.push({ l, pos: rk.findIndex((r) => r.iso3 === "URY") + 1, n: rk.length });
     });

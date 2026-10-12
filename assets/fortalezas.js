@@ -14,10 +14,6 @@
       que: "Si la gente puede elegir a su gobierno y tiene libertad de expresión, de prensa y de asociación." },
     { id: "PV.SC", nombre: "Estabilidad política", unidad: "/100", max: 100,
       que: "Qué tan poco probable es que el gobierno caiga por medios violentos o fuera de la Constitución." },
-    { id: "EG.ELC.RNWX.ZS", nombre: "Electricidad renovable no hidráulica", unidad: "%", max: 70,
-      que: "Porcentaje de la electricidad que sale de fuentes renovables, sin contar las represas." },
-    { id: "IT.NET.BBND.P2", nombre: "Banda ancha fija", unidad: " cada 100", max: 40,
-      que: "Conexiones fijas de banda ancha cada 100 habitantes." },
   ];
 
   const ultimo = (ind, iso) => data.filter((d) => d.indicador === ind && d.iso3 === iso).sort((a, b) => b.anio - a.anio)[0];
